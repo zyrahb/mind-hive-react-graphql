@@ -1,0 +1,19 @@
+{
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-brain-map-dev-142801-authRole",
+            "UnauthRoleArn": "arn:aws:iam::288547829232:role/amplify-brain-map-dev-142801-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::288547829232:role/amplify-brain-map-dev-142801-authRole",
+            "Region": "ap-southeast-2",
+            "DeploymentBucketName": "amplify-brain-map-dev-142801-deployment",
+            "UnauthRoleName": "amplify-brain-map-dev-142801-unauthRole",
+            "StackName": "amplify-brain-map-dev-142801",
+            "StackId": "arn:aws:cloudformation:ap-southeast-2:288547829232:stack/amplify-brain-map-dev-142801/eada8410-2d0f-11ea-8b05-0abc5d72d376"
+        },
+        "categories": {
+            "auth": {
+                "brainmap366c1aa8": {}
+            }
+        }
+    }
+}

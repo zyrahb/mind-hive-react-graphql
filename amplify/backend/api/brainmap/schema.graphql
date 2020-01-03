@@ -1,0 +1,18 @@
+type Topic @model @auth(rules: [{allow: owner}]) {
+    id: ID!
+    name: String!
+    description: String
+    bucket: String
+    nolinks: Int
+    shirtsize: Int
+    links: [Link] @connection(name: "TopicLinks")
+}
+
+type Link @model @auth(rules: [{allow: owner}]) {
+    id: ID!
+    partner: String
+    from: Topic! @connection(name: "TopicLinks")
+    to: String!
+    title: String!
+}
+

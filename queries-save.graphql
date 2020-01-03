@@ -1,0 +1,39 @@
+mutation {
+    createTopic(input:{
+        name:"Second Toipic",
+        description: "Yayaya",
+        nolinks: 1,
+        shirtsize: 3,
+    }) {
+        id
+        name
+    }
+}
+
+mutation {
+    createLink(
+        input: {
+            title: "First Linkity link",
+            linkFromId: "6d91cee9-8103-4e7e-be21-6e685574a15a",
+            to: "afbe316b-574b-4343-a47a-954a2cd81ec3"
+        }
+    ) {
+        id
+    }
+}
+
+input CreateLinkInput {
+    id: ID
+    title: String!
+    linkFromId: ID!
+}
+
+
+query {
+    listAlbums {
+        items {
+            id
+            name
+        }
+    }
+}
