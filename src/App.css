@@ -38,8 +38,15 @@
 }
 
 .diagram-component {
-    width: 400px;
-    height: 400px;
+    width: 800px;
+    height: 800px;
     border: solid 1px black;
     background-color: white;
+}
+
+.boddy {
+    position: absolute;
+    top: 40px; /* Header Height */
+    bottom: 20px; /* Footer Height */
+    width: 100%;
 }

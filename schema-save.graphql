@@ -5,14 +5,15 @@ type Topic @model @auth(rules: [{allow: owner}]) {
     bucket: String
     nolinks: Int
     shirtsize: Int
+    lastupdated: Date
     links: [Link] @connection(name: "TopicLinks")
     tags: [String]
 }
 
 type Link @model @auth(rules: [{allow: owner}]) {
     id: ID!
-    from: Topic! @connection(name: "TopicLinks")
-    to: String!
-    title: String!
+    dest: Topic! @connection(name: "TopicLinks")
+    origin: String!
+    title: String
 }
 
