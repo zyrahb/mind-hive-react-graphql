@@ -11,7 +11,7 @@ import {withAuthenticator} from 'aws-amplify-react';
 import * as go from 'gojs';
 import {ReactDiagram} from 'gojs-react';
 import './App.css';
-
+import 'gojs/extensions/HyperlinkText.js';
 
 Amplify.configure(aws_exports);
 
@@ -105,13 +105,18 @@ function initDiagram() {
                     spot2: new go.Spot(1, 1, -5, -5)
                 },
                 new go.Binding('fill', 'color')),
-            $(go.TextBlock,
-                {
-                    font: "bold 10pt helvetica, bold arial, sans-serif",
-                    textAlign: "center",
-                    maxSize: new go.Size(100, NaN)
-                },
-                new go.Binding("text", "text"))
+            $("HyperlinkText",
+                function(node) { return "http://localhost:3000/test"; },
+                function(node) { return node.data.text; },
+                { margin: 10 }
+            )
+            // $(go.TextBlock,
+            //     {
+            //         font: "bold 10pt helvetica, bold arial, sans-serif",
+            //         textAlign: "center",
+            //         maxSize: new go.Size(100, NaN)
+            //     },
+            //     new go.Binding("text", "text"))
         );
 
     diagram.linkTemplate =
@@ -166,16 +171,16 @@ function initFocusDiagram() {
                     spot2: new go.Spot(1, 1, -5, -5)
                 },
                 new go.Binding('fill', 'color')),
-            $(go.TextBlock,
-                {
-                    font: "bold 10pt helvetica, bold arial, sans-serif",
-                    textAlign: "center",
-                    maxSize: new go.Size(100, NaN)
-                },
-                new go.Binding("text", "text")),
+            // $(go.TextBlock,
+            //     {
+            //         font: "bold 10pt helvetica, bold arial, sans-serif",
+            //         textAlign: "center",
+            //         maxSize: new go.Size(100, NaN)
+            //     },
+            //     new go.Binding("text", "text")),
             $("HyperlinkText",
-                function(node) { return "https://gojs.net/" + node.data.version; },
-                function(node) { return "Visit GoJS " + node.data.version; },
+                function(node) { return "http://localhost:3000/test"; },
+                function(node) { return node.data.text; },
                 { margin: 10 }
             )
         );
