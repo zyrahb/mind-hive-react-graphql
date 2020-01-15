@@ -1,162 +1,147 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const createBlog = `mutation CreateBlog($input: CreateBlogInput!) {
-  createBlog(input: $input) {
+export const createTopic = `mutation CreateTopic($input: CreateTopicInput!) {
+  createTopic(input: $input) {
     id
     name
-    posts {
+    description
+    bucket
+    nolinks
+    shirtsize
+    color
+    links {
       items {
         id
+        to
         title
+        color
+        owner
       }
       nextToken
     }
+    tags
+    owner
   }
 }
 `;
-export const updateBlog = `mutation UpdateBlog($input: UpdateBlogInput!) {
-  updateBlog(input: $input) {
+export const updateTopic = `mutation UpdateTopic($input: UpdateTopicInput!) {
+  updateTopic(input: $input) {
     id
     name
-    posts {
+    description
+    bucket
+    nolinks
+    shirtsize
+    color
+    links {
       items {
         id
+        to
         title
+        color
+        owner
       }
       nextToken
     }
+    tags
+    owner
   }
 }
 `;
-export const deleteBlog = `mutation DeleteBlog($input: DeleteBlogInput!) {
-  deleteBlog(input: $input) {
+export const deleteTopic = `mutation DeleteTopic($input: DeleteTopicInput!) {
+  deleteTopic(input: $input) {
     id
     name
-    posts {
+    description
+    bucket
+    nolinks
+    shirtsize
+    color
+    links {
       items {
         id
+        to
         title
+        color
+        owner
       }
       nextToken
     }
+    tags
+    owner
   }
 }
 `;
-export const createPost = `mutation CreatePost($input: CreatePostInput!) {
-  createPost(input: $input) {
+export const createLink = `mutation CreateLink($input: CreateLinkInput!) {
+  createLink(input: $input) {
     id
-    title
-    blog {
+    from {
       id
       name
-      posts {
+      description
+      bucket
+      nolinks
+      shirtsize
+      color
+      links {
         nextToken
       }
+      tags
+      owner
     }
-    comments {
-      items {
-        id
-        content
-      }
-      nextToken
-    }
+    to
+    title
+    color
+    owner
   }
 }
 `;
-export const updatePost = `mutation UpdatePost($input: UpdatePostInput!) {
-  updatePost(input: $input) {
+export const updateLink = `mutation UpdateLink($input: UpdateLinkInput!) {
+  updateLink(input: $input) {
     id
-    title
-    blog {
+    from {
       id
       name
-      posts {
+      description
+      bucket
+      nolinks
+      shirtsize
+      color
+      links {
         nextToken
       }
+      tags
+      owner
     }
-    comments {
-      items {
-        id
-        content
-      }
-      nextToken
-    }
+    to
+    title
+    color
+    owner
   }
 }
 `;
-export const deletePost = `mutation DeletePost($input: DeletePostInput!) {
-  deletePost(input: $input) {
+export const deleteLink = `mutation DeleteLink($input: DeleteLinkInput!) {
+  deleteLink(input: $input) {
     id
-    title
-    blog {
+    from {
       id
       name
-      posts {
+      description
+      bucket
+      nolinks
+      shirtsize
+      color
+      links {
         nextToken
       }
+      tags
+      owner
     }
-    comments {
-      items {
-        id
-        content
-      }
-      nextToken
-    }
-  }
-}
-`;
-export const createComment = `mutation CreateComment($input: CreateCommentInput!) {
-  createComment(input: $input) {
-    id
-    content
-    post {
-      id
-      title
-      blog {
-        id
-        name
-      }
-      comments {
-        nextToken
-      }
-    }
-  }
-}
-`;
-export const updateComment = `mutation UpdateComment($input: UpdateCommentInput!) {
-  updateComment(input: $input) {
-    id
-    content
-    post {
-      id
-      title
-      blog {
-        id
-        name
-      }
-      comments {
-        nextToken
-      }
-    }
-  }
-}
-`;
-export const deleteComment = `mutation DeleteComment($input: DeleteCommentInput!) {
-  deleteComment(input: $input) {
-    id
-    content
-    post {
-      id
-      title
-      blog {
-        id
-        name
-      }
-      comments {
-        nextToken
-      }
-    }
+    to
+    title
+    color
+    owner
   }
 }
 `;

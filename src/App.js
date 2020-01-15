@@ -296,7 +296,7 @@ class Focus extends Component {
                         initDiagram={initFocusDiagram}
                         divClassName='diagram-component'
                         nodeDataArray={[
-                            {key: 1, text: "Concept Maps", color: "orange"},
+                            {key: "1a", text: "Concept Maps", color: "orange"},
                             {key: 2, text: "Organized Knowledge", color: "orange"},
                             {key: 3, text: "Context Dependent", color: "orange"},
                             {key: 4, text: "Concepts", color: "orange"},
@@ -307,7 +307,7 @@ class Focus extends Component {
                             {key: 9, text: "Hierarchically Structured", color: "orange"}
                         ]}
                         linkDataArray={[
-                            {from: 1, to: 2, text: "represent"},
+                            {from: "1a", to: 2, text: "represent"},
                             {from: 2, to: 3, text: "is"},
                             {from: 2, to: 4, text: "is"},
                             {from: 2, to: 5, text: "is"},
@@ -315,6 +315,7 @@ class Focus extends Component {
                             {from: 2, to: 10, text: "necessary\nfor"},
                             {from: 2, to: 12, text: "necessary\nfor"},
                             {from: 4, to: 5, text: "combine\nto form"},
+                            {from: 4, to: 5, text: "test combine\nto form"},
                             {from: 4, to: 6, text: "include"}
                         ]}
                         onModelChange={handleModelChange}
@@ -333,10 +334,6 @@ class App extends Component {
                     <Grid.Column>
                         <Route path="/" exact component={OverviewDiagram}/>
                         <Route path="/test" exact component={Focus}/>
-                        <Route
-                            path="/" exact
-                            render={() => <div><NavLink to='/test'>Go to highlighted topic</NavLink></div>}
-                        />
                         <Route
                             path="/test" exact
                             render={() => <div><NavLink to={"/" + toFocus}>Zoom out</NavLink></div>}

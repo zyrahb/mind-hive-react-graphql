@@ -6,21 +6,5 @@
 			"dependsOn": []
 		}
 	},
-	"api": {
-		"brainmap": {
-			"service": "AppSync",
-			"providerPlugin": "awscloudformation",
-			"output": {
-				"authConfig": {
-					"additionalAuthenticationProviders": [],
-					"defaultAuthentication": {
-						"authenticationType": "AMAZON_COGNITO_USER_POOLS",
-						"userPoolConfig": {
-							"userPoolId": "authbrainmap366c1aa8"
-						}
-					}
-				}
-			}
-		}
-	}
+	"api": {}
 }

@@ -1,162 +1,147 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const onCreateBlog = `subscription OnCreateBlog {
-  onCreateBlog {
+export const onCreateTopic = `subscription OnCreateTopic($owner: String!) {
+  onCreateTopic(owner: $owner) {
     id
     name
-    posts {
+    description
+    bucket
+    nolinks
+    shirtsize
+    color
+    links {
       items {
         id
+        to
         title
+        color
+        owner
       }
       nextToken
     }
+    tags
+    owner
   }
 }
 `;
-export const onUpdateBlog = `subscription OnUpdateBlog {
-  onUpdateBlog {
+export const onUpdateTopic = `subscription OnUpdateTopic($owner: String!) {
+  onUpdateTopic(owner: $owner) {
     id
     name
-    posts {
+    description
+    bucket
+    nolinks
+    shirtsize
+    color
+    links {
       items {
         id
+        to
         title
+        color
+        owner
       }
       nextToken
     }
+    tags
+    owner
   }
 }
 `;
-export const onDeleteBlog = `subscription OnDeleteBlog {
-  onDeleteBlog {
+export const onDeleteTopic = `subscription OnDeleteTopic($owner: String!) {
+  onDeleteTopic(owner: $owner) {
     id
     name
-    posts {
+    description
+    bucket
+    nolinks
+    shirtsize
+    color
+    links {
       items {
         id
+        to
         title
+        color
+        owner
       }
       nextToken
     }
+    tags
+    owner
   }
 }
 `;
-export const onCreatePost = `subscription OnCreatePost {
-  onCreatePost {
+export const onCreateLink = `subscription OnCreateLink($owner: String!) {
+  onCreateLink(owner: $owner) {
     id
-    title
-    blog {
+    from {
       id
       name
-      posts {
+      description
+      bucket
+      nolinks
+      shirtsize
+      color
+      links {
         nextToken
       }
+      tags
+      owner
     }
-    comments {
-      items {
-        id
-        content
-      }
-      nextToken
-    }
+    to
+    title
+    color
+    owner
   }
 }
 `;
-export const onUpdatePost = `subscription OnUpdatePost {
-  onUpdatePost {
+export const onUpdateLink = `subscription OnUpdateLink($owner: String!) {
+  onUpdateLink(owner: $owner) {
     id
-    title
-    blog {
+    from {
       id
       name
-      posts {
+      description
+      bucket
+      nolinks
+      shirtsize
+      color
+      links {
         nextToken
       }
+      tags
+      owner
     }
-    comments {
-      items {
-        id
-        content
-      }
-      nextToken
-    }
+    to
+    title
+    color
+    owner
   }
 }
 `;
-export const onDeletePost = `subscription OnDeletePost {
-  onDeletePost {
+export const onDeleteLink = `subscription OnDeleteLink($owner: String!) {
+  onDeleteLink(owner: $owner) {
     id
-    title
-    blog {
+    from {
       id
       name
-      posts {
+      description
+      bucket
+      nolinks
+      shirtsize
+      color
+      links {
         nextToken
       }
+      tags
+      owner
     }
-    comments {
-      items {
-        id
-        content
-      }
-      nextToken
-    }
-  }
-}
-`;
-export const onCreateComment = `subscription OnCreateComment {
-  onCreateComment {
-    id
-    content
-    post {
-      id
-      title
-      blog {
-        id
-        name
-      }
-      comments {
-        nextToken
-      }
-    }
-  }
-}
-`;
-export const onUpdateComment = `subscription OnUpdateComment {
-  onUpdateComment {
-    id
-    content
-    post {
-      id
-      title
-      blog {
-        id
-        name
-      }
-      comments {
-        nextToken
-      }
-    }
-  }
-}
-`;
-export const onDeleteComment = `subscription OnDeleteComment {
-  onDeleteComment {
-    id
-    content
-    post {
-      id
-      title
-      blog {
-        id
-        name
-      }
-      comments {
-        nextToken
-      }
-    }
+    to
+    title
+    color
+    owner
   }
 }
 `;

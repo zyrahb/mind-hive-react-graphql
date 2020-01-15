@@ -1,0 +1,22 @@
+type Topic @model @auth(rules: [{allow: owner}]) {
+    id: ID!
+    name: String!
+    description: String
+    bucket: String
+    nolinks: Int
+    shirtsize: Int
+    color: String
+    toLinks: [Link] @connection(name: "toConnector")
+    fromLinks: [Link] @connection(name: "fromConnector")
+    tags: [String]
+}
+
+type Link @model @auth(rules: [{allow: owner}]){
+    id: ID!
+    to: String!
+    from: String!
+    toTopic: Topic! @connection(name: "toConnector")
+    fromTopic: Topic! @connection(name: "fromConnector")
+    title: String!
+    color: String
+}

@@ -1,0 +1,105 @@
+#Create Topic
+#Create Link
+
+#View All
+#View Focus
+
+# 6hkgr2tf77t01gdqmvu06cavkq
+# test
+# Password123
+
+mutation {
+    createTopic(input:{
+        name:"first topic",
+        description: "bla"
+    }) {
+        id
+        name
+    }
+}
+
+
+mutation {
+    createLink(input:{
+        title:"first link",
+        to: "d5e2ff88-2ab4-4a4a-901e-fd7bef18ff6",
+        linkToTopicId:"d5e2ff88-2ab4-4a4a-901e-fd7bef18ff6",
+        from: "070ba19d-9e3b-4740-ab23-715034ddf006",
+        linkFromTopicId: "070ba19d-9e3b-4740-ab23-715034ddf006"
+    }) {
+        id
+
+    }
+}
+
+
+query {
+    listTopics {
+        items {
+            key: id
+            name
+        }
+    }
+}
+
+query {
+    listTopics {
+        items {
+            key: id
+            name
+            links{
+                items {
+                    title
+                }
+            }
+        }
+    }
+}
+
+query {
+    listLinks {
+        items {
+            from {
+                id
+            }
+            title
+            to {
+                id
+            }
+        }
+    }
+}
+
+
+query {
+
+    listLinks(filter: {
+        or: [
+            {
+                to: {
+                    eq: "070ba19d-9e3b-4740-ab23-715034ddf006"
+                }
+            }, {
+                from: {
+                    eq: "070ba19d-9e3b-4740-ab23-715034ddf006"
+                } }
+        ]
+
+    }) {
+        items {
+            fromTopic {
+                name
+            }
+            title
+            toTopic {
+                name
+            }
+        }
+    }
+}
+
+
+
+    quering the links that have to or from TopicId
+    links that have to or from Topic Id
+
