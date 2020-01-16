@@ -1,17 +1,15 @@
-// src/App.js for Step 3
+/* eslint-disable */
 
-import React, {Component} from 'react';
-import {Header, Grid} from 'semantic-ui-react';
-import {BrowserRouter as Router, Route, NavLink} from 'react-router-dom';
-
-
-import Amplify from 'aws-amplify';
-import aws_exports from './aws-exports';
+import Amplify, {API, graphqlOperation} from 'aws-amplify';
 import {withAuthenticator} from 'aws-amplify-react';
 import * as go from 'gojs';
 import {ReactDiagram} from 'gojs-react';
-import './App.css';
 import 'gojs/extensions/HyperlinkText.js';
+import React, {Component} from 'react';
+import {BrowserRouter as Router, NavLink, Route} from 'react-router-dom';
+import {Grid, Header} from 'semantic-ui-react';
+import './App.css';
+import aws_exports from './aws-exports';
 
 Amplify.configure(aws_exports);
 
@@ -106,9 +104,13 @@ function initDiagram() {
                 },
                 new go.Binding('fill', 'color')),
             $("HyperlinkText",
-                function(node) { return "http://localhost:3000/test"; },
-                function(node) { return node.data.text; },
-                { margin: 10 }
+                function (node) {
+                    return "http://localhost:3000/test";
+                },
+                function (node) {
+                    return node.data.text;
+                },
+                {margin: 10}
             )
             // $(go.TextBlock,
             //     {
@@ -162,7 +164,7 @@ function initFocusDiagram() {
     diagram.nodeTemplate =
         $(go.Node, "Auto",  // the whole node panel
             // define the node's outer shape, which will surround the TextBlock
-            { click: nodeClick },
+            {click: nodeClick},
             $(go.Shape, "RoundedRectangle",
                 {
                     fill: "white",
@@ -179,9 +181,13 @@ function initFocusDiagram() {
             //     },
             //     new go.Binding("text", "text")),
             $("HyperlinkText",
-                function(node) { return "http://localhost:3000/test"; },
-                function(node) { return node.data.text; },
-                { margin: 10 }
+                function (node) {
+                    return "http://localhost:3000/test";
+                },
+                function (node) {
+                    return node.data.text;
+                },
+                {margin: 10}
             )
         );
 
@@ -223,64 +229,74 @@ function handleModelChange(changes) {
     alert('GoJS model changed!');
 }
 
+const ListTopics = `query ListTopics{
+    listTopics{
+        items {
+            key: id
+            text: name
+            color
+        }
+    }
+}`;
+
+const ListLinks = `query ListLinks{
+    listLinks {
+        items {
+            to
+            from
+        }
+    }
+}`;
+
 class OverviewDiagram extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            hasResults: false,
+            searched: false
+        }
+    }
+
+    updateLabel = (e) => {
+        this.setState({label: e.target.value, searched: false});
+    }
+
+    async componentDidMount() {
+        const resultListTopics = await API.graphql(graphqlOperation(ListTopics));
+        const resultListLinks = await API.graphql(graphqlOperation(ListLinks));
+        alert(JSON.stringify(resultListLinks.data.listLinks.items));
+        let hasResults = false;
+        if (resultListTopics.data.listTopics.items.length !== 0 && resultListLinks.data.listLinks.items.length !== 0) {
+            hasResults = true;
+        }
+        const topicResults =  resultListTopics.data.listTopics.items;
+        const linkResults =  resultListLinks.data.listLinks.items;
+        this.setState({topics: topicResults, links: linkResults, hasResults, searched: true});
+    }
+
+    noResults() {
+        return !this.state.searched
+            ? ''
+            : <Header as='h4' color='grey'>Please add a Topic...</Header>
+    }
+
+
     render() {
         return (
             <div>
                 <div>
-                    <ReactDiagram
-                        initDiagram={initDiagram}
-                        divClassName='diagram-component'
-                        nodeDataArray={[
-                            {key: 1, text: "Concept Maps", color: "lightblue"},
-                            {key: 2, text: "Organized Knowledge", color: "lightblue"},
-                            {key: 3, text: "Context Dependent", color: "lightblue"},
-                            {key: 4, text: "Concepts", color: "lightblue"},
-                            {key: 5, text: "Propositions", color: "lightblue"},
-                            {key: 6, text: "Associated Feelings or Affect", color: "lightblue"},
-                            {key: 7, text: "Perceived Regularities", color: "lightblue"},
-                            {key: 8, text: "Labeled", color: "lightblue"},
-                            {key: 9, text: "Hierarchically Structured", color: "lightblue"},
-                            {key: 10, text: "Effective Teaching", color: "lightblue"},
-                            {key: 11, text: "Crosslinks", color: "lightblue"},
-                            {key: 12, text: "Effective Learning", color: "lightblue"},
-                            {key: 13, text: "Events (Happenings)", color: "lightblue"},
-                            {key: 14, text: "Objects (Things)", color: "lightblue"},
-                            {key: 15, text: "Symbols", color: "lightblue"},
-                            {key: 16, text: "Words", color: "lightblue"},
-                            {key: 17, text: "Creativity", color: "lightblue"},
-                            {key: 18, text: "Interrelationships", color: "lightblue"},
-                            {key: 19, text: "HELLO", color: "lightblue"},
-                            {key: 20, text: "Different Map Segments", color: "lightblue"}
-                        ]}
-                        linkDataArray={[
-                            {from: 1, to: 2, text: "represent"},
-                            {from: 2, to: 3, text: "is"},
-                            {from: 2, to: 4, text: "is"},
-                            {from: 2, to: 5, text: "is"},
-                            {from: 2, to: 6, text: "includes"},
-                            {from: 2, to: 10, text: "necessary\nfor"},
-                            {from: 2, to: 12, text: "necessary\nfor"},
-                            {from: 4, to: 5, text: "combine\nto form"},
-                            {from: 4, to: 6, text: "include"},
-                            {from: 4, to: 7, text: "are"},
-                            {from: 4, to: 8, text: "are"},
-                            {from: 4, to: 9, text: "are"},
-                            {from: 5, to: 9, text: "are"},
-                            {from: 5, to: 11, text: "may be"},
-                            {from: 7, to: 13, text: "in"},
-                            {from: 7, to: 14, text: "in"},
-                            {from: 7, to: 19, text: "begin\nwith"},
-                            {from: 8, to: 15, text: "with"},
-                            {from: 8, to: 16, text: "with"},
-                            {from: 9, to: 17, text: "aids"},
-                            {from: 11, to: 18, text: "show"},
-                            {from: 12, to: 19, text: "begins\nwith"},
-                            {from: 17, to: 18, text: "needed\nto see"},
-                            {from: 18, to: 20, text: "between"}
-                        ]}
-                        onModelChange={handleModelChange}
-                    />
+                    {
+                        this.state.hasResults
+                            ? <ReactDiagram
+                                initDiagram={initDiagram}
+                                divClassName='diagram-component'
+                                nodeDataArray={this.state.topics}
+                                linkDataArray={this.state.links}
+                                onModelChange={handleModelChange}
+                            />
+                            : this.noResults()
+                    }
                 </div>
             </div>
         )
@@ -327,6 +343,7 @@ class Focus extends Component {
 }
 
 class App extends Component {
+
     render() {
         return (
             <Router>
