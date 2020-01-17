@@ -7,7 +7,7 @@ import {ReactDiagram} from 'gojs-react';
 import 'gojs/extensions/HyperlinkText.js';
 import React, {Component} from 'react';
 import {BrowserRouter as Router, NavLink, Route} from 'react-router-dom';
-import {Grid, Header} from 'semantic-ui-react';
+import {Header} from 'semantic-ui-react';
 import './App.css';
 import aws_exports from './aws-exports';
 
@@ -105,7 +105,7 @@ function initDiagram() {
                 new go.Binding('fill', 'color')),
             $("HyperlinkText",
                 function (node) {
-                    return "http://localhost:3000/test";
+                    return window.location.origin + "/topic/" + node.data.key;
                 },
                 function (node) {
                     return node.data.text;
@@ -182,7 +182,7 @@ function initFocusDiagram() {
             //     new go.Binding("text", "text")),
             $("HyperlinkText",
                 function (node) {
-                    return "http://localhost:3000/test";
+                    return window.location.origin + "/topic/" + node.data.key;
                 },
                 function (node) {
                     return node.data.text;
@@ -270,8 +270,8 @@ class OverviewDiagram extends Component {
         if (resultListTopics.data.listTopics.items.length !== 0 && resultListLinks.data.listLinks.items.length !== 0) {
             hasResults = true;
         }
-        const topicResults =  resultListTopics.data.listTopics.items;
-        const linkResults =  resultListLinks.data.listLinks.items;
+        const topicResults = resultListTopics.data.listTopics.items;
+        const linkResults = resultListLinks.data.listLinks.items;
         this.setState({topics: topicResults, links: linkResults, hasResults, searched: true});
     }
 
@@ -285,18 +285,23 @@ class OverviewDiagram extends Component {
     render() {
         return (
             <div>
-                <div>
-                    {
-                        this.state.hasResults
-                            ? <ReactDiagram
-                                initDiagram={initDiagram}
-                                divClassName='diagram-component'
-                                nodeDataArray={this.state.topics}
-                                linkDataArray={this.state.links}
-                                onModelChange={handleModelChange}
-                            />
-                            : this.noResults()
-                    }
+                <div className="ui grid container padded">
+                    <div className="twelve wide column">
+                        {
+                            this.state.hasResults
+                                ? <ReactDiagram
+                                    initDiagram={initDiagram}
+                                    divClassName='diagram-component'
+                                    nodeDataArray={this.state.topics}
+                                    linkDataArray={this.state.links}
+                                    onModelChange={handleModelChange}
+                                />
+                                : this.noResults()
+                        }
+                    </div>
+                    <div className="four wide column">
+                        <ActionMenu/>
+                    </div>
                 </div>
             </div>
         )
@@ -362,13 +367,12 @@ class Focus extends Component {
     }
 
     async componentDidMount() {
-        const resultFocusNode = await API.graphql(graphqlOperation(GetFocusTopic, {topicId: "ac2be89b-f319-4531-ae69-4c303388ac47"}));
-        const resultFocusTo = await API.graphql(graphqlOperation(GetFocusTopicsLinksTo, {topicId: "ac2be89b-f319-4531-ae69-4c303388ac47"}));
-        const resultFocusFrom = await API.graphql(graphqlOperation(GetFocusTopicsLinksFrom, {topicId: "ac2be89b-f319-4531-ae69-4c303388ac47"}));
+        const resultFocusNode = await API.graphql(graphqlOperation(GetFocusTopic, {topicId: this.props.id}));
+        const resultFocusTo = await API.graphql(graphqlOperation(GetFocusTopicsLinksTo, {topicId: this.props.id}));
+        const resultFocusFrom = await API.graphql(graphqlOperation(GetFocusTopicsLinksFrom, {topicId: this.props.id}));
         // alert(JSON.stringify(resultAllFocus.data.listLinks.items));
         let hasResults = false;
 
-        // alert(JSON.stringify(resultFocusNode));
 
         const focusTopicResultsTo = resultFocusTo.data.listLinks.items.map(el => (Object.assign({},
             {key: el.from.id},
@@ -381,22 +385,26 @@ class Focus extends Component {
             {color: el.to.color})));
 
         const focusTopicsResults = [resultFocusNode.data.getTopic, ...focusTopicResultsTo, ...focusTopicResultsFrom];
-
         const focusLinksResultsTo = resultFocusTo.data.listLinks.items.map(el => (Object.assign(el,
             {from: el.from.id},
-            {to: "ac2be89b-f319-4531-ae69-4c303388ac47"})));
+            {to: this.props.id})));
+
         const focusLinksResultsFrom = resultFocusFrom.data.listLinks.items.map(el => (Object.assign(el,
             {to: el.to.id},
-            {from: "ac2be89b-f319-4531-ae69-4c303388ac47"})));
-
+            {from: this.props.id})));
         const focusLinksResults = [...focusLinksResultsTo, ...focusLinksResultsFrom];
 
-        if (focusTopicsResults.length !== 0 && focusLinksResults.length !== 0) {
+        // alert(JSON.stringify(focusTopicsResults.length));
+
+        if (focusTopicsResults.length !== 0 || focusLinksResults.length !== 0) {
             hasResults = true;
         }
         // alert(JSON.stringify(focusTopicsResults));
         // alert(JSON.stringify(focusLinksResults));
-        this.setState({topics: focusTopicsResults, links: focusLinksResults, hasResults, searched: true});
+        this.setState({
+            topic: resultFocusNode.data.getTopic, topics: focusTopicsResults,
+            links: focusLinksResults, hasResults, searched: true
+        });
     }
 
     noResults() {
@@ -409,19 +417,178 @@ class Focus extends Component {
     render() {
         return (
             <div>
-                <div>
-                    {
-                        this.state.hasResults
-                            ? <ReactDiagram
-                                initDiagram={initFocusDiagram}
-                                divClassName='diagram-component'
-                                nodeDataArray={this.state.topics}
-                                linkDataArray={this.state.links}
-                                onModelChange={handleModelChange}
-                            />
-                            : this.noResults()
+                {
+                    this.state.hasResults
+                        ? <div className="ui grid container padded">
+                            <div className="twelve wide column">
+                                <ReactDiagram
+                                    initDiagram={initFocusDiagram}
+                                    divClassName='diagram-component'
+                                    nodeDataArray={this.state.topics}
+                                    linkDataArray={this.state.links}
+                                    onModelChange={handleModelChange}
+                                />
+                            </div>
+                            <div className="four wide column">
+                                <ActionMenu topic={this.state.topic}/>
+                            </div>
+                        </div>
+                        : this.noResults()
+                }
+
+            </div>
+        )
+    }
+}
+
+class ActionMenu extends Component {
+    render() {
+        return (
+            <div>
+                <Header size={'large'}>Welcome to Brain Map!</Header>
+                <Route
+                    path="/topic/:topicId" exact
+                    render={
+                        props =>
+                            <div>
+                                <NavLink to={"/"}>Zoom out</NavLink>
+                                <Header size={"medium"}>{this.props.topic.text}</Header>
+                                <Header size={"small"}>{this.props.topic.description}</Header>
+                            </div>
                     }
-                </div>
+                />
+                <AddTopic/>
+                <AddLink/>
+            </div>
+        )
+    }
+}
+
+class AddTopic extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            name: '',
+            description: ''
+        };
+    }
+
+
+    handleChange = (event) => {
+        let change = {};
+        change[event.target.name] = event.target.value;
+        this.setState(change);
+    };
+
+    handleSubmit = async (event) => {
+        event.preventDefault();
+        console.log(event);
+        const NewTopic = `mutation NewTopic($name: String!, $description: String)  {
+            createTopic(input:{
+                name: $name
+                description: $description
+                color: "orange"
+            }) {
+                id
+            }
+        }`;
+
+        const result = await API.graphql(graphqlOperation(NewTopic,
+            {
+                name: this.state.name,
+                description: this.state.description
+            }));
+        console.info(result);
+        this.setState({name: '', description: ''})
+    };
+
+    render() {
+        return (
+            <div>
+                <Header as='h3'>Add a Topic</Header>
+                <form className="ui form" onSubmit={this.handleSubmit}>
+                    <div className="field">
+                        <label>Topic</label>
+                        <input type="text" name={"name"} placeholder="Topic"
+                               onChange={this.handleChange}/>
+                    </div>
+                    <div className="field">
+                        <label>Description</label>
+                        <input type="text" name={"description"} placeholder="Description"
+                               onChange={this.handleChange}/>
+                    </div>
+                    <button className="ui button" type="submit">Submit</button>
+                </form>
+            </div>
+        )
+    }
+}
+
+class AddLink extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            name: '',
+            description: ''
+        };
+    }
+
+
+    handleChange = (event) => {
+        let change = {};
+        change[event.target.name] = event.target.value;
+        this.setState(change);
+    };
+
+    handleSubmit = async (event) => {
+        event.preventDefault();
+        console.log(event);
+        const NewLink = `mutation NewLink($title: String!, $toTopic: String!, $fromTopic: String!, $toTopicId: ID!, $fromTopicId: ID!)  {
+            createLink(input:{
+                title: $title,
+                to: $toTopic,
+                linkToTopicId:$toTopicId,
+                from: $fromTopic,
+                linkFromTopicId: $fromTopicId
+            }) {
+                id
+            }
+        }`;
+
+        const result = await API.graphql(graphqlOperation(NewLink,
+            {
+                title: this.state.title,
+                toTopic: this.state.to,
+                toTopicId: this.state.to,
+                fromTopic: this.state.from,
+                fromTopicId: this.state.from
+            }));
+        console.info(result);
+        this.setState({name: '', description: ''})
+    };
+
+    render() {
+        return (
+            <div>
+                <Header as='h3'>Add a Link</Header>
+                <form className="ui form" onSubmit={this.handleSubmit}>
+                    <div className="field">
+                        <label>To</label>
+                        <input type="text" name={"to"} placeholder="To"
+                               onChange={this.handleChange}/>
+                    </div>
+                    <div className="field">
+                        <label>Link Description</label>
+                        <input type="text" name={"title"} placeholder="Relationship"
+                               onChange={this.handleChange}/>
+                    </div>
+                    <div className="field">
+                        <label>From</label>
+                        <input type="text" name={"from"} placeholder="From"
+                               onChange={this.handleChange}/>
+                    </div>
+                    <button className="ui button" type="submit">Submit</button>
+                </form>
             </div>
         )
     }
@@ -432,17 +599,18 @@ class App extends Component {
     render() {
         return (
             <Router>
-                <Grid padded>
-                    <Grid.Column>
-                        <Route path="/" exact component={OverviewDiagram}/>
-                        <Route path="/test" exact component={Focus}/>
-                        <Route
-                            path="/test" exact
-                            render={() => <div><NavLink to={"/" + toFocus}>Zoom out</NavLink></div>}
-                        />
-                        <Header>This is where the options go</Header>
-                    </Grid.Column>
-                </Grid>
+                <div>
+                    <Route path="/" exact component={OverviewDiagram}/>
+                    <Route
+                        path="/topic/:topicId" exact
+                        render={
+                            props =>
+                                <div>
+                                    <Focus id={props.match.params.topicId}/>
+                                </div>
+                        }
+                    />
+                </div>
             </Router>
 
         );

@@ -28,7 +28,6 @@ mutation {
         linkFromTopicId: "070ba19d-9e3b-4740-ab23-715034ddf006"
     }) {
         id
-
     }
 }
 
