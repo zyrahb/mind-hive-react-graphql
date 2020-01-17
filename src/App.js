@@ -265,7 +265,7 @@ class OverviewDiagram extends Component {
     async componentDidMount() {
         const resultListTopics = await API.graphql(graphqlOperation(ListTopics));
         const resultListLinks = await API.graphql(graphqlOperation(ListLinks));
-        alert(JSON.stringify(resultListLinks.data.listLinks.items));
+        // alert(JSON.stringify(resultListLinks.data.listLinks.items));
         let hasResults = false;
         if (resultListTopics.data.listTopics.items.length !== 0 && resultListLinks.data.listLinks.items.length !== 0) {
             hasResults = true;
@@ -303,39 +303,124 @@ class OverviewDiagram extends Component {
     }
 }
 
+
+const GetFocusTopic = `query GetFocusTopic($topicId: ID!) {
+  getTopic(id: $topicId) {
+    key: id
+    text: name
+    description
+    color
+  }
+}`;
+
+
+const GetFocusTopicsLinksTo = `query GetFocusTopicsLinksTo($topicId: String!){
+    listLinks(filter: {
+                to: {
+                    eq: $topicId
+                }
+    }) {
+        items {
+            text: title
+            from: fromTopic {
+                id
+                name
+            }
+        }
+    }
+}`;
+
+
+const GetFocusTopicsLinksFrom = `query GetFocusTopicsLinksFrom($topicId: String!){
+    listLinks(filter: {
+                from: {
+                    eq: $topicId
+                }
+    }) {
+        items {
+            text: title
+            to: toTopic {
+                id
+                name
+                color
+            }
+        }
+    }
+}`;
+
 class Focus extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            hasResults: false,
+            searched: false
+        }
+    }
+
+    updateLabel = (e) => {
+        this.setState({label: e.target.value, searched: false});
+    }
+
+    async componentDidMount() {
+        const resultFocusNode = await API.graphql(graphqlOperation(GetFocusTopic, {topicId: "ac2be89b-f319-4531-ae69-4c303388ac47"}));
+        const resultFocusTo = await API.graphql(graphqlOperation(GetFocusTopicsLinksTo, {topicId: "ac2be89b-f319-4531-ae69-4c303388ac47"}));
+        const resultFocusFrom = await API.graphql(graphqlOperation(GetFocusTopicsLinksFrom, {topicId: "ac2be89b-f319-4531-ae69-4c303388ac47"}));
+        // alert(JSON.stringify(resultAllFocus.data.listLinks.items));
+        let hasResults = false;
+
+        // alert(JSON.stringify(resultFocusNode));
+
+        const focusTopicResultsTo = resultFocusTo.data.listLinks.items.map(el => (Object.assign({},
+            {key: el.from.id},
+            {text: el.from.name},
+            {color: el.from.color})));
+
+        const focusTopicResultsFrom = resultFocusFrom.data.listLinks.items.map(el => (Object.assign({},
+            {key: el.to.id},
+            {text: el.to.name},
+            {color: el.to.color})));
+
+        const focusTopicsResults = [resultFocusNode.data.getTopic, ...focusTopicResultsTo, ...focusTopicResultsFrom];
+
+        const focusLinksResultsTo = resultFocusTo.data.listLinks.items.map(el => (Object.assign(el,
+            {from: el.from.id},
+            {to: "ac2be89b-f319-4531-ae69-4c303388ac47"})));
+        const focusLinksResultsFrom = resultFocusFrom.data.listLinks.items.map(el => (Object.assign(el,
+            {to: el.to.id},
+            {from: "ac2be89b-f319-4531-ae69-4c303388ac47"})));
+
+        const focusLinksResults = [...focusLinksResultsTo, ...focusLinksResultsFrom];
+
+        if (focusTopicsResults.length !== 0 && focusLinksResults.length !== 0) {
+            hasResults = true;
+        }
+        // alert(JSON.stringify(focusTopicsResults));
+        // alert(JSON.stringify(focusLinksResults));
+        this.setState({topics: focusTopicsResults, links: focusLinksResults, hasResults, searched: true});
+    }
+
+    noResults() {
+        return !this.state.searched
+            ? ''
+            : <Header as='h4' color='grey'>Please add a Topic...</Header>
+    }
+
+
     render() {
         return (
             <div>
                 <div>
-                    <ReactDiagram
-                        initDiagram={initFocusDiagram}
-                        divClassName='diagram-component'
-                        nodeDataArray={[
-                            {key: "1a", text: "Concept Maps", color: "orange"},
-                            {key: 2, text: "Organized Knowledge", color: "orange"},
-                            {key: 3, text: "Context Dependent", color: "orange"},
-                            {key: 4, text: "Concepts", color: "orange"},
-                            {key: 5, text: "Propositions", color: "orange"},
-                            {key: 6, text: "Associated Feelings or Affect", color: "orange"},
-                            {key: 7, text: "Perceived Regularities", color: "orange"},
-                            {key: 8, text: "Labeled", color: "orange"},
-                            {key: 9, text: "Hierarchically Structured", color: "orange"}
-                        ]}
-                        linkDataArray={[
-                            {from: "1a", to: 2, text: "represent"},
-                            {from: 2, to: 3, text: "is"},
-                            {from: 2, to: 4, text: "is"},
-                            {from: 2, to: 5, text: "is"},
-                            {from: 2, to: 6, text: "includes"},
-                            {from: 2, to: 10, text: "necessary\nfor"},
-                            {from: 2, to: 12, text: "necessary\nfor"},
-                            {from: 4, to: 5, text: "combine\nto form"},
-                            {from: 4, to: 5, text: "test combine\nto form"},
-                            {from: 4, to: 6, text: "include"}
-                        ]}
-                        onModelChange={handleModelChange}
-                    />
+                    {
+                        this.state.hasResults
+                            ? <ReactDiagram
+                                initDiagram={initFocusDiagram}
+                                divClassName='diagram-component'
+                                nodeDataArray={this.state.topics}
+                                linkDataArray={this.state.links}
+                                onModelChange={handleModelChange}
+                            />
+                            : this.noResults()
+                    }
                 </div>
             </div>
         )
