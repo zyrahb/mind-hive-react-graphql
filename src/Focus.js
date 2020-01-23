@@ -9,6 +9,7 @@ import ActionMenu from './ActionMenu'
 import 'gojs/extensions/HyperlinkText.js';
 
 var toFocus = '';
+var linkNode ='';
 
 function ContinuousForceDirectedLayout() {
     go.ForceDirectedLayout.call(this);
@@ -38,10 +39,12 @@ const GetFocusTopicsLinksTo = `query GetFocusTopicsLinksTo($topicId: String!){
                 }
     }) {
         items {
+            linkid: id
             text: title
             from: fromTopic {
                 id
                 name
+                color
             }
         }
     }
@@ -55,6 +58,7 @@ const GetFocusTopicsLinksFrom = `query GetFocusTopicsLinksFrom($topicId: String!
                 }
     }) {
         items {
+            linkid: id
             text: title
             to: toTopic {
                 id
@@ -118,8 +122,14 @@ function initFocusDiagram() {
             )
         );
 
+    function linkClick(e, obj) {
+        linkNode = obj.hb;
+        console.log(linkNode);
+    };
+
     diagram.linkTemplate =
         $(go.Link,  // the whole link panel
+            {click: linkClick},
             $(go.Shape,  // the link shape
                 {stroke: "black"}),
             $(go.Shape,  // the arrowhead
@@ -142,7 +152,8 @@ function initFocusDiagram() {
                         margin: 4
                     },
                     new go.Binding("text", "text"))
-            )
+            ),
+
         );
 
     return diagram;
@@ -190,7 +201,7 @@ class Focus extends Component {
             {from: this.props.id})));
         const focusLinksResults = [...focusLinksResultsTo, ...focusLinksResultsFrom];
 
-        // alert(JSON.stringify(focusTopicsResults.length));
+        // alert(JSON.stringify(focusLinksResults));
 
         if (focusTopicsResults.length !== 0 || focusLinksResults.length !== 0) {
             hasResults = true;
@@ -226,7 +237,7 @@ class Focus extends Component {
                                 />
                             </div>
                             <div className="four wide column">
-                                <ActionMenu topic={this.state.topic}/>
+                                <ActionMenu topic={this.state.topic} link={linkNode}/>
                             </div>
                         </div>
                         : this.noResults()
@@ -236,6 +247,5 @@ class Focus extends Component {
         )
     }
 }
-
 
 export default Focus;

@@ -17,6 +17,7 @@ class App extends Component {
             <Router>
                 <div>
                     <Route path="/" exact component={Vista}/>
+                    <Route path="/tag/:tags" exact component={Vista}/>
                     <Route
                         path="/topic/:topicId" exact
                         render={
