@@ -5,7 +5,37 @@ import {Header} from 'semantic-ui-react';
 import {NavLink, Route} from 'react-router-dom';
 import {API, graphqlOperation} from 'aws-amplify';
 
+const GetAllTopics = `query GetAllTopics {
+    listTopics {
+        items{
+          name
+          id
+        }
+    }
+}`;
+
 class ActionMenu extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            hasResults: false,
+            searched: false
+        }
+    }
+
+    async componentDidMount() {
+        const resultAllTopics = await API.graphql(graphqlOperation(GetAllTopics));
+        // alert(JSON.stringify(resultAllTopics.data.listTopics.items));
+        let hasResults = false;
+        if (resultAllTopics.data.listTopics.items.length !== 0) {
+            hasResults = true;
+        }
+        this.setState({
+            allTopicNamesIds: resultAllTopics.data.listTopics.items,
+            hasResults, searched: true
+        });
+    }
+
     render() {
         return (
             <div>
@@ -25,14 +55,20 @@ class ActionMenu extends Component {
                             props =>
                                 <div>
                                     <NavLink to={"/"}>Zoom out</NavLink>
-                                    <Header size={"medium"}>{this.props.topic.text}</Header>
+                                    <Header size={"Large"}>{this.props.topic.text}</Header>
                                     <body>{this.props.topic.description}</body>
                                 </div>
                         }
                     />
                 </div>
                 <AddTopic/>
-                <AddLink/>
+                <div>
+                    {
+                        this.state.hasResults
+                            ? <AddLink allTopics={this.state.allTopicNamesIds}/>
+                            : <div/>
+                    }
+                </div>
                 <Route
                     path="/topic/:topicId" exact
                     render={
@@ -86,6 +122,7 @@ class AddTopic extends Component {
             }));
         console.info(result);
         this.setState({name: '', description: ''})
+        window.location.reload();
     };
 
     render() {
@@ -109,7 +146,7 @@ class AddTopic extends Component {
                             <input type="text" name={"color"} placeholder="Colour"
                                    onChange={this.handleChange}/>
                         </div>
-                        <button className="ui button" type="submit">Submit</button>
+                        <button className="ui button" type="submit">Add</button>
                     </form>
                 </div>
             </div>
@@ -121,6 +158,8 @@ class AddLink extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            to: '',
+            from: '',
             name: '',
             description: ''
         };
@@ -128,14 +167,16 @@ class AddLink extends Component {
 
 
     handleChange = (event) => {
+        // console.log(event.target);
         let change = {};
         change[event.target.name] = event.target.value;
         this.setState(change);
+        // console.log(this.state);
     };
 
     handleSubmit = async (event) => {
         event.preventDefault();
-        console.log(event);
+        console.log(this.state);
         const NewLink = `mutation NewLink($title: String!, $toTopic: String!, $fromTopic: String!, $toTopicId: ID!, $fromTopicId: ID!)  {
             createLink(input:{
                 title: $title,
@@ -158,6 +199,7 @@ class AddLink extends Component {
             }));
         console.info(result);
         this.setState({name: '', description: ''})
+        window.location.reload();
     };
 
     render() {
@@ -166,22 +208,22 @@ class AddLink extends Component {
                 <div className={"action-component"}>
                     <Header as='h3'>Add a Link</Header>
                     <form className="ui form" onSubmit={this.handleSubmit}>
-                        <div className="field">
-                            <label>To</label>
-                            <input type="text" name={"to"} placeholder="To"
-                                   onChange={this.handleChange}/>
-                        </div>
+                        <select name={"from"} className="ui dropdown" onChange={this.handleChange}>
+                            <option value="">Topic From</option>
+                            {this.props.allTopics.map(({ name, id }) => <option value={id} >{name}</option>)}
+                        </select>
+                        <p/>
                         <div className="field">
                             <label>Link Description</label>
                             <input type="text" name={"title"} placeholder="Relationship"
                                    onChange={this.handleChange}/>
                         </div>
-                        <div className="field">
-                            <label>From</label>
-                            <input type="text" name={"from"} placeholder="From"
-                                   onChange={this.handleChange}/>
-                        </div>
-                        <button className="ui button" type="submit">Submit</button>
+                        <select name={"to"} className="ui dropdown" onChange={this.handleChange}>
+                            <option value="">Topic To</option>
+                            {this.props.allTopics.map(({ name, id }) => <option value={id} >{name}</option>)}
+                        </select>
+                        <p/>
+                        <button className="ui button" type="submit">Add</button>
                     </form>
                 </div>
             </div>
@@ -230,6 +272,7 @@ class UpdateTopic extends Component {
             }));
         console.info(result);
         this.setState({name: '', description: ''})
+        window.location.reload();
     };
 
     render() {
@@ -253,7 +296,7 @@ class UpdateTopic extends Component {
                             <input type="text" name={"color"} defaultValue={this.props.topic.color}
                                    onChange={this.handleChange}/>
                         </div>
-                        <button className="ui button" type="submit">Submit</button>
+                        <button className="ui button" type="submit">Update</button>
                     </form>
                 </div>
             </div>
