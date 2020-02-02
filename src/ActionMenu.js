@@ -9,20 +9,28 @@ class ActionMenu extends Component {
     render() {
         return (
             <div>
-                <Header size={'large'}>Welcome to Brain Map!</Header>
-                <Route
-                    path="/" exact/>
-                <Route
-                    path="/topic/:topicId" exact
-                    render={
-                        props =>
-                            <div>
-                                <NavLink to={"/"}>Zoom out</NavLink>
-                                <Header size={"medium"}>{this.props.topic.text}</Header>
-                                <Header size={"small"}>{this.props.topic.description}</Header>
-                            </div>
-                    }
-                />
+                <div className={"focus-details-component"}>
+
+                    <Route
+                        path="/" exact
+                        render={
+                            props =>
+                                <div>
+                                    <Header size={'large'}>Welcome to Mind Hive!</Header>
+                                </div>
+                        }/>
+                    <Route
+                        path="/topic/:topicId" exact
+                        render={
+                            props =>
+                                <div>
+                                    <NavLink to={"/"}>Zoom out</NavLink>
+                                    <Header size={"medium"}>{this.props.topic.text}</Header>
+                                    <body>{this.props.topic.description}</body>
+                                </div>
+                        }
+                    />
+                </div>
                 <AddTopic/>
                 <AddLink/>
                 <Route
@@ -83,25 +91,27 @@ class AddTopic extends Component {
     render() {
         return (
             <div>
-                <Header as='h3'>Add a Topic</Header>
-                <form className="ui form" onSubmit={this.handleSubmit}>
-                    <div className="field">
-                        <label>Topic</label>
-                        <input type="text" name={"name"} placeholder="Topic"
-                               onChange={this.handleChange}/>
-                    </div>
-                    <div className="field">
-                        <label>Description</label>
-                        <input type="text" name={"description"} placeholder="Description"
-                               onChange={this.handleChange}/>
-                    </div>
-                    <div className="field">
-                        <label>Colour</label>
-                        <input type="text" name={"color"} placeholder="Colour"
-                               onChange={this.handleChange}/>
-                    </div>
-                    <button className="ui button" type="submit">Submit</button>
-                </form>
+                <div className={"action-component"}>
+                    <Header as='h3'>Add a Topic</Header>
+                    <form className="ui form" onSubmit={this.handleSubmit}>
+                        <div className="field">
+                            <label>Topic</label>
+                            <input type="text" name={"name"} placeholder="Topic"
+                                   onChange={this.handleChange}/>
+                        </div>
+                        <div className="field">
+                            <label>Description</label>
+                            <input type="text" name={"description"} placeholder="Description"
+                                   onChange={this.handleChange}/>
+                        </div>
+                        <div className="field">
+                            <label>Colour</label>
+                            <input type="text" name={"color"} placeholder="Colour"
+                                   onChange={this.handleChange}/>
+                        </div>
+                        <button className="ui button" type="submit">Submit</button>
+                    </form>
+                </div>
             </div>
         )
     }
@@ -153,25 +163,27 @@ class AddLink extends Component {
     render() {
         return (
             <div>
-                <Header as='h3'>Add a Link</Header>
-                <form className="ui form" onSubmit={this.handleSubmit}>
-                    <div className="field">
-                        <label>To</label>
-                        <input type="text" name={"to"} placeholder="To"
-                               onChange={this.handleChange}/>
-                    </div>
-                    <div className="field">
-                        <label>Link Description</label>
-                        <input type="text" name={"title"} placeholder="Relationship"
-                               onChange={this.handleChange}/>
-                    </div>
-                    <div className="field">
-                        <label>From</label>
-                        <input type="text" name={"from"} placeholder="From"
-                               onChange={this.handleChange}/>
-                    </div>
-                    <button className="ui button" type="submit">Submit</button>
-                </form>
+                <div className={"action-component"}>
+                    <Header as='h3'>Add a Link</Header>
+                    <form className="ui form" onSubmit={this.handleSubmit}>
+                        <div className="field">
+                            <label>To</label>
+                            <input type="text" name={"to"} placeholder="To"
+                                   onChange={this.handleChange}/>
+                        </div>
+                        <div className="field">
+                            <label>Link Description</label>
+                            <input type="text" name={"title"} placeholder="Relationship"
+                                   onChange={this.handleChange}/>
+                        </div>
+                        <div className="field">
+                            <label>From</label>
+                            <input type="text" name={"from"} placeholder="From"
+                                   onChange={this.handleChange}/>
+                        </div>
+                        <button className="ui button" type="submit">Submit</button>
+                    </form>
+                </div>
             </div>
         )
     }
@@ -223,25 +235,27 @@ class UpdateTopic extends Component {
     render() {
         return (
             <div>
-                <Header as='h3'>Update a Topic</Header>
-                <form className="ui form" onSubmit={this.handleSubmit}>
-                    <div className="field">
-                        <label>Topic</label>
-                        <input type="text" name={"name"} defaultValue={this.props.topic.text}
-                               onChange={this.handleChange}/>
-                    </div>
-                    <div className="field">
-                        <label>Description</label>
-                        <input type="text" name={"description"} defaultValue={this.props.topic.description}
-                               onChange={this.handleChange}/>
-                    </div>
-                    <div className="field">
-                        <label>Colour</label>
-                        <input type="text" name={"color"} defaultValue={this.props.topic.color}
-                               onChange={this.handleChange}/>
-                    </div>
-                    <button className="ui button" type="submit">Submit</button>
-                </form>
+                <div className={"action-component"}>
+                    <Header as='h3'>Update a Topic</Header>
+                    <form className="ui form" onSubmit={this.handleSubmit}>
+                        <div className="field">
+                            <label>Topic</label>
+                            <input type="text" name={"name"} defaultValue={this.props.topic.text}
+                                   onChange={this.handleChange}/>
+                        </div>
+                        <div className="field">
+                            <label>Description</label>
+                            <input type="text" name={"description"} defaultValue={this.props.topic.description}
+                                   onChange={this.handleChange}/>
+                        </div>
+                        <div className="field">
+                            <label>Colour</label>
+                            <input type="text" name={"color"} defaultValue={this.props.topic.color}
+                                   onChange={this.handleChange}/>
+                        </div>
+                        <button className="ui button" type="submit">Submit</button>
+                    </form>
+                </div>
             </div>
         )
     }
