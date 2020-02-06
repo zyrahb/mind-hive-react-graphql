@@ -6,9 +6,12 @@ https://d1v0z5tmm8db3h.cloudfront.net
 
 
 ## TODO
+- Focus Update in place
+- Drop down for colour
+- Text box for Topic/description
 - Filter on tag, for Vista view, with + filter on things
-- Update link
-- Delete topic
+- Update link, will be an addition to add
+- Delete topic, make sure there's a are you sure
 - Delete links
 - Markdown for description
 - Upload Image for topic
@@ -17,6 +20,9 @@ https://d1v0z5tmm8db3h.cloudfront.net
 - Use for ipad
 - Study mode/Edit mode
 - Click on topic, redirects instead of new page
+- First time users have a topic and a link
+- Fix up cognito so username doesn't have to Case Sensitive
+- Focus view, when adding a topic make it so the link is automatic to topic
 
 ## Use
 
