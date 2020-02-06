@@ -15,6 +15,8 @@ https://d1v0z5tmm8db3h.cloudfront.net
 - Cache large search
 - Search
 - Use for ipad
+- Study mode/Edit mode
+- Click on topic, redirects instead of new page
 
 ## Use
 
@@ -23,4 +25,7 @@ https://d1v0z5tmm8db3h.cloudfront.net
 ## Notes
 
 When publishing with cloudfront and S3 make sure to clear the cloudfront cache if you keep getting `Unauthorised`.
+It takes a couple of hours to get the cloudfront site working. Don't dispare
+
+7/2/2020 - Finding a bug that the List functions don't list all of them but are in the dynamodb weird aye?
 

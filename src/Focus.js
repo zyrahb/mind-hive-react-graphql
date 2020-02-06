@@ -201,7 +201,6 @@ class Focus extends Component {
             {from: this.props.id})));
         const focusLinksResults = [...focusLinksResultsTo, ...focusLinksResultsFrom];
 
-        // alert(JSON.stringify(focusLinksResults));
 
         if (focusTopicsResults.length !== 0 || focusLinksResults.length !== 0) {
             hasResults = true;

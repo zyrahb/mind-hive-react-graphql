@@ -120,7 +120,8 @@ class AddTopic extends Component {
                 name: this.state.name,
                 description: this.state.description
             }));
-        console.info(result);
+        // console.info(result);
+        alert(JSON.stringify(result));
         this.setState({name: '', description: ''})
         window.location.reload();
     };
@@ -197,7 +198,8 @@ class AddLink extends Component {
                 fromTopic: this.state.from,
                 fromTopicId: this.state.from
             }));
-        console.info(result);
+        // console.info(result);
+        alert(JSON.stringify(result));
         this.setState({name: '', description: ''})
         window.location.reload();
     };
