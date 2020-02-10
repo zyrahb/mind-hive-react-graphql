@@ -80,7 +80,7 @@ function handleModelChange(changes) {
 }
 
 const ListTopics = `query ListTopics{
-    listTopics{
+    listTopics(limit:1000){
         items {
             key: id
             text: name
@@ -90,7 +90,7 @@ const ListTopics = `query ListTopics{
 }`;
 
 const ListLinks = `query ListLinks{
-    listLinks {
+    listLinks(limit: 2000) {
         items {
             to
             from
@@ -115,7 +115,7 @@ class Vista extends Component {
     async componentDidMount() {
         const resultListTopics = await API.graphql(graphqlOperation(ListTopics));
         const resultListLinks = await API.graphql(graphqlOperation(ListLinks));
-        // alert(JSON.stringify(resultListTopics.data.listTopics.items));
+        alert(JSON.stringify(resultListTopics.data.listTopics.items));
         // alert(JSON.stringify(resultListLinks.data.listLinks.items));
 
         let hasResults = false;
