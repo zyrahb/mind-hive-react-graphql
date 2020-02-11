@@ -14,6 +14,40 @@ const GetAllTopics = `query GetAllTopics {
     }
 }`;
 
+const topicColourOptions = [
+    {
+        key: 'red',
+        text: 'red',
+        value: 'tomato',
+    },
+    {
+        key: 'orange',
+        text: 'orange',
+        value: 'orange',
+    },
+    {
+        key: 'yellow',
+        text: 'yellow',
+        value: 'yellow',
+    },
+    {
+        key: 'green',
+        text: 'green',
+        value: 'greenyellow',
+    },
+    {
+        key: 'blue',
+        text: 'blue',
+        value: 'deepskyblue',
+    },
+    {
+        key: 'purple',
+        text: 'purple',
+        value: 'violet',
+    },
+];
+
+
 class ActionMenu extends Component {
     constructor(props) {
         super(props);
@@ -102,7 +136,6 @@ class AddTopic extends Component {
 
     handleSubmit = async (event) => {
         event.preventDefault();
-        console.log(event);
         const NewTopic = `mutation NewTopic($name: String!, $description: String, $color: String)  {
             createTopic(input:{
                 name: $name
@@ -116,10 +149,11 @@ class AddTopic extends Component {
         const result = await API.graphql(graphqlOperation(NewTopic,
             {
                 name: this.state.name,
-                description: this.state.description
+                description: this.state.description,
+                color: this.state.color
             }));
         // console.info(result);
-        alert(JSON.stringify(result));
+        // alert(JSON.stringify(result));
         this.setState({name: '', description: ''})
         window.location.reload();
     };
@@ -140,11 +174,10 @@ class AddTopic extends Component {
                             <input type="text" name={"description"} placeholder="Description"
                                    onChange={this.handleChange}/>
                         </div>
-                        <div className="field">
-                            <label>Colour</label>
-                            <input type="text" name={"color"} placeholder="Colour"
-                                   onChange={this.handleChange}/>
-                        </div>
+                        <select name={"color"} className="ui dropdown" onChange={this.handleChange}>
+                            <option value="">Colour</option>
+                            {topicColourOptions.map(({text, value}) => <option value={value}>{text}</option>)}
+                        </select>
                         <button className="ui button" type="submit">Add</button>
                     </form>
                 </div>
@@ -197,7 +230,7 @@ class AddLink extends Component {
                 fromTopicId: this.state.from
             }));
         // console.info(result);
-        alert(JSON.stringify(result));
+        // alert(JSON.stringify(result));
         this.setState({name: '', description: ''})
         window.location.reload();
     };
@@ -210,7 +243,7 @@ class AddLink extends Component {
                     <form className="ui form" onSubmit={this.handleSubmit}>
                         <select name={"from"} className="ui dropdown" onChange={this.handleChange}>
                             <option value="">Topic From</option>
-                            {this.props.allTopics.map(({ name, id }) => <option value={id} >{name}</option>)}
+                            {this.props.allTopics.map(({name, id}) => <option value={id}>{name}</option>)}
                         </select>
                         <p/>
                         <div className="field">
@@ -220,7 +253,7 @@ class AddLink extends Component {
                         </div>
                         <select name={"to"} className="ui dropdown" onChange={this.handleChange}>
                             <option value="">Topic To</option>
-                            {this.props.allTopics.map(({ name, id }) => <option value={id} >{name}</option>)}
+                            {this.props.allTopics.map(({name, id}) => <option value={id}>{name}</option>)}
                         </select>
                         <p/>
                         <button className="ui button" type="submit">Add</button>
@@ -290,11 +323,10 @@ class UpdateTopic extends Component {
                             <input type="text" name={"description"} defaultValue={this.props.topic.description}
                                    onChange={this.handleChange}/>
                         </div>
-                        <div className="field">
-                            <label>Colour</label>
-                            <input type="text" name={"color"} defaultValue={this.props.topic.color}
-                                   onChange={this.handleChange}/>
-                        </div>
+                        <select name={"color"} className="ui dropdown" onChange={this.handleChange}>
+                            <option value={this.props.topic.color}>Colour</option>
+                            {topicColourOptions.map(({text, value}) => <option value={value}>{text}</option>)}
+                        </select>
                         <button className="ui button" type="submit">Update</button>
                     </form>
                 </div>
