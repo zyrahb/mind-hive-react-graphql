@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f532bdd0-3be8-4e2d-ac04-626f31afd7c2" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/amplify/backend/api/brainmap/schema.graphql" beforeDir="false" afterPath="$PROJECT_DIR$/amplify/backend/api/brainmap/schema.graphql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/schema-backup.graphql" beforeDir="false" afterPath="$PROJECT_DIR$/schema-backup.graphql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ActionMenu.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/ActionMenu.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -29,6 +32,19 @@
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/ActionMenu.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="616">
+              <caret line="114" column="16" selection-start-line="114" selection-start-column="16" selection-end-line="114" selection-end-column="16" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+                <element signature="e#22#61#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Vista.js">
           <provider selected="true" editor-type-id="text-editor">
@@ -42,15 +58,34 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/ActionMenu.js">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/amplify/backend/api/brainmap/schema.graphql">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="197">
-              <caret line="322" column="45" selection-start-line="322" selection-start-column="45" selection-end-line="322" selection-end-column="45" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-                <element signature="e#22#61#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="323">
+              <caret line="19" column="18" lean-forward="true" selection-start-line="19" selection-start-column="18" selection-end-line="19" selection-end-column="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/yarn.lock">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/schema-backup.graphql">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="340">
+              <caret line="37" selection-start-line="37" selection-end-line="37" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/graphql/schema.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="340">
+              <caret line="20" column="26" selection-start-line="20" selection-start-column="26" selection-end-line="20" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -68,8 +103,8 @@
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="204">
-                <caret line="12" column="14" lean-forward="true" selection-start-line="12" selection-start-column="14" selection-end-line="12" selection-end-column="14" />
+              <first_editor relative-caret-position="252">
+                <caret line="35" column="42" selection-start-line="35" selection-start-column="42" selection-end-line="35" selection-end-column="42" />
               </first_editor>
               <second_editor />
             </state>
@@ -114,9 +149,9 @@
       <find>homepage</find>
       <find>AddTopic</find>
       <find>alert</find>
-      <find>add</find>
       <find>selec</find>
       <find>Descrip</find>
+      <find>add</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/public</dir>
@@ -137,26 +172,28 @@
         <option value="$PROJECT_DIR$/src/HyperlinkText.js" />
         <option value="$PROJECT_DIR$/schema-save.graphql" />
         <option value="$PROJECT_DIR$/queries-save.graphql" />
-        <option value="$PROJECT_DIR$/schema-backup.graphql" />
         <option value="$PROJECT_DIR$/src/graphql/queries.js" />
         <option value="$PROJECT_DIR$/queries-example.graphql" />
         <option value="$PROJECT_DIR$/src/src/Focus.js" />
         <option value="$PROJECT_DIR$/src/src/Overview.js" />
         <option value="$PROJECT_DIR$/src/Overview.js" />
-        <option value="$PROJECT_DIR$/amplify/backend/api/brainmap/schema.graphql" />
         <option value="$PROJECT_DIR$/src/App.js" />
         <option value="$PROJECT_DIR$/src/App.css" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/src/Focus.js" />
         <option value="$PROJECT_DIR$/src/Vista.js" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/amplify/backend/api/brainmap/schema.graphql" />
+        <option value="$PROJECT_DIR$/schema-backup.graphql" />
         <option value="$PROJECT_DIR$/src/ActionMenu.js" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" fullScreen="true">
-    <option name="width" value="1440" />
-    <option name="height" value="900" />
+    <option name="x" value="-705" />
+    <option name="y" value="-1440" />
+    <option name="width" value="2560" />
+    <option name="height" value="1440" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -237,6 +274,12 @@
               <item name="brain-map" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="brain-map" type="b2602c69:ProjectViewProjectNode" />
+              <item name="brain-map" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="graphql" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -303,10 +346,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
+    <frame x="-705" y="-1440" width="2560" height="1440" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13733906" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.07625099" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -321,7 +364,7 @@
       <window_info anchor="bottom" id="Docker" order="8" />
       <window_info anchor="bottom" id="GraphQL" order="9" />
       <window_info anchor="bottom" id="Database Changes" order="10" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.4622057" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.27691165" />
       <window_info anchor="bottom" id="Event Log" order="12" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="13" weight="0.32961586" />
       <window_info anchor="bottom" id="TypeScript" order="14" />
@@ -491,13 +534,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/graphql/schema.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" column="26" lean-forward="true" selection-start-line="20" selection-start-column="26" selection-end-line="20" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/gojs/release/go.d.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="266">
@@ -546,13 +582,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/schema-backup.graphql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="5" selection-start-line="6" selection-start-column="5" selection-end-line="6" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/graphql/queries.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
@@ -581,13 +610,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
           <caret line="2" column="1" lean-forward="true" selection-start-line="2" selection-start-column="1" selection-end-line="2" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/amplify/backend/api/brainmap/schema.graphql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="11" column="1" lean-forward="true" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
         </state>
       </provider>
     </entry>
@@ -682,6 +704,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="252">
+            <caret line="35" column="42" selection-start-line="35" selection-start-column="42" selection-end-line="35" selection-end-column="42" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Vista.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1967">
@@ -693,20 +725,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="204">
-            <caret line="12" column="14" lean-forward="true" selection-start-line="12" selection-start-column="14" selection-end-line="12" selection-end-column="14" />
-          </first_editor>
-          <second_editor />
+    <entry file="file://$PROJECT_DIR$/src/graphql/schema.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="20" column="26" selection-start-line="20" selection-start-column="26" selection-end-line="20" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/yarn.lock">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/schema-backup.graphql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="37" selection-start-line="37" selection-end-line="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/amplify/backend/api/brainmap/schema.graphql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" column="18" lean-forward="true" selection-start-line="19" selection-start-column="18" selection-end-line="19" selection-end-column="18" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ActionMenu.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="197">
-          <caret line="322" column="45" selection-start-line="322" selection-start-column="45" selection-end-line="322" selection-end-column="45" />
+        <state relative-caret-position="616">
+          <caret line="114" column="16" selection-start-line="114" selection-start-column="16" selection-end-line="114" selection-end-column="16" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <element signature="e#22#61#0" expanded="true" />

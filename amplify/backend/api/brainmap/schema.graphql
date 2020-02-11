@@ -8,7 +8,7 @@ type Topic @model @auth(rules: [{allow: owner}]) {
     color: String
     toLinks: [Link] @connection(name: "toConnector")
     fromLinks: [Link] @connection(name: "fromConnector")
-    tags: [String]
+    tags: [TagHelper] @connection(keyName: "byTopic", fields: ["id"])
 }
 
 type Link @model @auth(rules: [{allow: owner}]){
@@ -19,4 +19,19 @@ type Link @model @auth(rules: [{allow: owner}]){
     fromTopic: Topic! @connection(name: "fromConnector")
     title: String!
     color: String
+}
+
+type TagHelper @model(queries: null) @key(name: "byTopic", fields: ["topicID", "helperID"])
+@key(name: "byHelper", fields: ["helperID", "topicID"]) @auth(rules: [{allow: owner}]){
+    id: ID!
+    topicID: ID!
+    helperID: ID!
+    topic: Topic! @connection(fields: ["topicID"])
+    helper: Tag! @connection(fields: ["helperID"])
+}
+
+type Tag @model @auth(rules: [{allow: owner}]){
+    id: ID!
+    name: String!
+    topics: [TagHelper] @connection(keyName: "byHelper", fields: ["id"])
 }

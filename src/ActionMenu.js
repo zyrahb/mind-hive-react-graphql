@@ -102,6 +102,7 @@ class ActionMenu extends Component {
                             : <div/>
                     }
                 </div>
+                <AddTag/>
                 <Route
                     path="/topic/:topicId" exact
                     render={
@@ -111,7 +112,6 @@ class ActionMenu extends Component {
                             </div>
                     }
                 />
-
             </div>
         )
     }
@@ -123,7 +123,7 @@ class AddTopic extends Component {
         this.state = {
             name: '',
             description: '',
-            color: ''
+            color: 'white'
         };
     }
 
@@ -256,6 +256,64 @@ class AddLink extends Component {
                             {this.props.allTopics.map(({name, id}) => <option value={id}>{name}</option>)}
                         </select>
                         <p/>
+                        <button className="ui button" type="submit">Add</button>
+                    </form>
+                </div>
+            </div>
+        )
+    }
+}
+
+
+class AddTag extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            name: ''
+        };
+    }
+
+
+    handleChange = (event) => {
+        // console.log(event.target);
+        let change = {};
+        change[event.target.name] = event.target.value;
+        this.setState(change);
+        // console.log(this.state);
+    };
+
+    handleSubmit = async (event) => {
+        event.preventDefault();
+        console.log(this.state);
+        const NewTag = `mutation AddTag($name: String!)  {
+            createTag(input: { 
+                name: $name
+                }) 
+            {
+                id
+            }  
+        }`;
+
+        const result = await API.graphql(graphqlOperation(NewTag,
+            {
+                name: this.state.name
+            }));
+        console.info(result);
+        // alert(JSON.stringify(result));
+        this.setState({name: '', description: ''})
+        window.location.reload();
+    };
+
+    render() {
+        return (
+            <div>
+                <div className={"action-component"}>
+                    <Header as='h3'>Add a Tag</Header>
+                    <form className="ui form" onSubmit={this.handleSubmit}>
+                        <div className="field">
+                            <input type="text" name={"name"} placeholder="Enter Tag"
+                                   onChange={this.handleChange}/>
+                        </div>
                         <button className="ui button" type="submit">Add</button>
                     </form>
                 </div>
