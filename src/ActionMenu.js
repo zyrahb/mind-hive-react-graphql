@@ -54,9 +54,8 @@ class ActionMenu extends Component {
                         render={
                             props =>
                                 <div>
-                                    <NavLink to={"/"}>Zoom out</NavLink>
-                                    <Header size={"Large"}>{this.props.topic.text}</Header>
-                                    <body>{this.props.topic.description}</body>
+                                    <UpdateTopic topic={this.props.topic}/>
+                                    {/*<UpdateLink link={this.props.link}/>*/}
                                 </div>
                         }
                     />
@@ -74,8 +73,7 @@ class ActionMenu extends Component {
                     render={
                         props =>
                             <div>
-                                <UpdateTopic topic={this.props.topic}/>
-                                {/*<UpdateLink link={this.props.link}/>*/}
+                                <DeleteTopic topic={this.props.topic}/>
                             </div>
                     }
                 />
@@ -91,7 +89,7 @@ class AddTopic extends Component {
         this.state = {
             name: '',
             description: '',
-            color: "orange"
+            color: ''
         };
     }
 
@@ -281,10 +279,9 @@ class UpdateTopic extends Component {
         return (
             <div>
                 <div className={"action-component"}>
-                    <Header as='h3'>Update a Topic</Header>
                     <form className="ui form" onSubmit={this.handleSubmit}>
                         <div className="field">
-                            <label>Topic</label>
+                            <Header as='h3'>{this.props.topic.text}</Header>
                             <input type="text" name={"name"} defaultValue={this.props.topic.text}
                                    onChange={this.handleChange}/>
                         </div>
@@ -299,6 +296,54 @@ class UpdateTopic extends Component {
                                    onChange={this.handleChange}/>
                         </div>
                         <button className="ui button" type="submit">Update</button>
+                    </form>
+                </div>
+            </div>
+        )
+    }
+}
+
+
+class DeleteTopic extends Component {
+    constructor(props) {
+        super(props);
+    }
+
+    handleChange = (event) => {
+        let change = {};
+        change[event.target.name] = event.target.value;
+        this.setState(change);
+    };
+
+    handleSubmit = async (event) => {
+        event.preventDefault();
+        console.log(event);
+        const DeleteTopic = `mutation DeleteTopic($id: ID!)  {
+            deleteTopic(input: {
+                id: $id
+            }) {
+                id
+            }
+        }`;
+
+        console.info(this.state);
+        console.info(this.props);
+        const result = await API.graphql(graphqlOperation(DeleteTopic,
+            {
+                id: this.props.topic.key
+            }));
+        // alert(JSON.stringify(result));
+        this.setState({name: '', description: ''});
+        // alert(JSON.stringify(window.location));
+        window.location.replace("/");
+    };
+
+    render() {
+        return (
+            <div>
+                <div className={"action-component"}>
+                    <form className="ui form" onSubmit={this.handleSubmit}>
+                        <button className="ui button" type="submit">Delete Topic</button>
                     </form>
                 </div>
             </div>

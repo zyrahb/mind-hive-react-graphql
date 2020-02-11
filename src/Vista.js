@@ -115,7 +115,7 @@ class Vista extends Component {
     async componentDidMount() {
         const resultListTopics = await API.graphql(graphqlOperation(ListTopics));
         const resultListLinks = await API.graphql(graphqlOperation(ListLinks));
-        alert(JSON.stringify(resultListTopics.data.listTopics.items));
+        // alert(JSON.stringify(resultListTopics.data.listTopics.items));
         // alert(JSON.stringify(resultListLinks.data.listLinks.items));
 
         let hasResults = false;
