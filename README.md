@@ -7,11 +7,11 @@ https://d1v0z5tmm8db3h.cloudfront.net
 
 ## TODO
 - Focus Update in place
-- Drop down for colour
-- Text box for Topic/description
+- ~~Drop down for colour~~
+- ~~Text box for Topic/description~~
 - Filter on tag, for Vista view, with + filter on things
 - Update link, will be an addition to add
-- Delete topic, make sure there's a are you sure
+- Delete topic, to delete the links too make sure there's a are you sure
 - Delete links
 - Markdown for description
 - Upload Image for topic

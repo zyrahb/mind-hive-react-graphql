@@ -1,7 +1,7 @@
 /* eslint-disable */
 
 import React, {Component} from "react";
-import {Header} from 'semantic-ui-react';
+import {Header, TextArea} from 'semantic-ui-react';
 import {NavLink, Route} from 'react-router-dom';
 import {API, graphqlOperation} from 'aws-amplify';
 
@@ -171,7 +171,7 @@ class AddTopic extends Component {
                         </div>
                         <div className="field">
                             <label>Description</label>
-                            <input type="text" name={"description"} placeholder="Description"
+                            <TextArea rows={3} type="text" name={"description"} placeholder="Description"
                                    onChange={this.handleChange}/>
                         </div>
                         <select name={"color"} className="ui dropdown" onChange={this.handleChange}>
@@ -320,7 +320,7 @@ class UpdateTopic extends Component {
                         </div>
                         <div className="field">
                             <label>Description</label>
-                            <input type="text" name={"description"} defaultValue={this.props.topic.description}
+                            <TextArea rows={5} type="text" name={"description"} defaultValue={this.props.topic.description}
                                    onChange={this.handleChange}/>
                         </div>
                         <select name={"color"} className="ui dropdown" onChange={this.handleChange}>
