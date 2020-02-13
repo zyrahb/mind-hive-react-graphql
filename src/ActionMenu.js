@@ -6,7 +6,7 @@ import {NavLink, Route} from 'react-router-dom';
 import {API, graphqlOperation} from 'aws-amplify';
 
 const GetAllTopics = `query GetAllTopics {
-    listTopics {
+    listTopics (limit: 2000) {
         items{
           name
           id
@@ -122,7 +122,7 @@ class AddTopic extends Component {
         super(props);
         this.state = {
             name: '',
-            description: '',
+            description: ' ',
             color: 'white'
         };
     }

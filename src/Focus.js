@@ -33,7 +33,8 @@ const GetFocusTopic = `query GetFocusTopic($topicId: ID!) {
 
 
 const GetFocusTopicsLinksTo = `query GetFocusTopicsLinksTo($topicId: String!){
-    listLinks(filter: {
+    listLinks(limit: 2000
+              filter: {
                 to: {
                     eq: $topicId
                 }
@@ -52,7 +53,8 @@ const GetFocusTopicsLinksTo = `query GetFocusTopicsLinksTo($topicId: String!){
 
 
 const GetFocusTopicsLinksFrom = `query GetFocusTopicsLinksFrom($topicId: String!){
-    listLinks(filter: {
+    listLinks(limit: 2000
+              filter: {
                 from: {
                     eq: $topicId
                 }
