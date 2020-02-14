@@ -80,7 +80,7 @@ class ActionMenu extends Component {
                         render={
                             props =>
                                 <div>
-                                    <Header size={'large'}>Welcome to Mind Hive!</Header>
+                                    <Header size={'large'}>Welcome to Mindhive!</Header>
                                 </div>
                         }/>
                     <Route

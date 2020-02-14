@@ -1,12 +1,11 @@
-# Brain-map/Mind-Hive
+# MindHive
 
-Mind mapping tool using AWS Amplify, React, Graphql(DynamoDB/AppSync)
+Inspo: I'm a visual learner and like to see how things are related. Couldn't 
+find a mind mapping tool I liked so made one instead.
+ 
+Tech stack: AWS Amplify, React, Graphql(DynamoDB/AppSync)
 
 https://d1v0z5tmm8db3h.cloudfront.net
-
-Screenshot
-
-
 
 ## TODO
 - Focus Update in place
@@ -35,27 +34,27 @@ Screenshot
 - Put my details at the bottom
 
 ## Use
+- `npm  start` will run on localhost:3000 (though will probs need to create your own amplify project :sweat_smile:)
+- `amplify publsih` update changes for running website
 
-`npm  start` will run on localhost:3000
-`amplify publsih` update changes for running website
+## Lessons Learnt 
 
-## Notes
-
-When publishing with cloudfront and S3 make sure to clear the cloudfront cache if you keep getting `Unauthorised`.
+- When publishing with cloudfront and S3 make sure to clear the cloudfront cache if you keep getting `Unauthorised`.
 It takes a couple of hours to get the cloudfront site working. Don't despair.
+- Graphql queries make sure you add limits for listModel
 
+### Ref
 
-7/2/2020 - Finding a bug that the List functions don't list all of them but are in the dynamodb weird aye?
+#### Links
 
-### Source
-
+- graph js lib:https://gojs.net/latest/index.html
 - graphql schemas: https://aws-amplify.github.io/docs/cli-toolchain/graphql
 - React ui: https://react.semantic-ui.com
 - Amplify Auth: https://github.com/mwarger/amplify-auth-examples
 
 #### Colours
-5E36FF 
+- 5E36FF, bluepurple 
 
 #### Icons
 
-logo: https://iconmonstr.com/idea-12-png/ 
+- logo: https://iconmonstr.com/idea-12-png/ 
