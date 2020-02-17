@@ -126,7 +126,7 @@ function initFocusDiagram() {
 
     function linkClick(e, obj) {
         linkNode = obj.hb;
-        console.log(linkNode);
+        // alert(JSON.stringify(linkNode));
     };
 
     diagram.linkTemplate =
@@ -179,7 +179,8 @@ class Focus extends Component {
         const resultFocusNode = await API.graphql(graphqlOperation(GetFocusTopic, {topicId: this.props.id}));
         const resultFocusTo = await API.graphql(graphqlOperation(GetFocusTopicsLinksTo, {topicId: this.props.id}));
         const resultFocusFrom = await API.graphql(graphqlOperation(GetFocusTopicsLinksFrom, {topicId: this.props.id}));
-        // alert(JSON.stringify(resultAllFocus.data.listLinks.items));
+        // alert(JSON.stringify(resultFocusTo.data.listLinks.items));
+        // alert(JSON.stringify(resultFocusFrom.data.listLinks.items));
         let hasResults = false;
 
 
@@ -238,7 +239,7 @@ class Focus extends Component {
                                 />
                             </div>
                             <div className="four wide column">
-                                <ActionMenu topic={this.state.topic} link={linkNode}/>
+                                <ActionMenu topic={this.state.topic} link={linkNode} links={this.state.links}/>
                             </div>
                         </div>
                         : this.noResults()
