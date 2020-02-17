@@ -2,7 +2,7 @@
 
 import React, {Component} from "react";
 import {Header, TextArea} from 'semantic-ui-react';
-import {NavLink, Route} from 'react-router-dom';
+import {Route} from 'react-router-dom';
 import {API, graphqlOperation} from 'aws-amplify';
 
 const GetAllTopics = `query GetAllTopics {
@@ -108,7 +108,7 @@ class ActionMenu extends Component {
                     render={
                         props =>
                             <div>
-                                <DeleteTopic topic={this.props.topic}/>
+                                <DeleteTopic topic={this.props.topic} links={this.props.links}/>
                             </div>
                     }
                 />
@@ -416,13 +416,32 @@ class DeleteTopic extends Component {
             }
         }`;
 
-        console.info(this.state);
-        console.info(this.props);
+        const DeleteLink = `mutation DeleteLink($id: ID!)  {
+            deleteLink(input: {
+                id: $id
+            }) {
+                id
+            }
+        }`;
+
+        // console.info(this.state);
+
         const result = await API.graphql(graphqlOperation(DeleteTopic,
             {
                 id: this.props.topic.key
             }));
-        // alert(JSON.stringify(result));
+        console.log(JSON.stringify(result));
+
+        // console.info(this.props);
+        this.props.links.forEach(async link => {
+            console.log(link.linkid);
+            const result = await API.graphql(graphqlOperation(DeleteLink,
+                {
+                    id: link.linkid
+                }));
+            console.log(JSON.stringify(result));
+        });
+
         this.setState({name: '', description: ''});
         // alert(JSON.stringify(window.location));
         window.location.replace("/");
