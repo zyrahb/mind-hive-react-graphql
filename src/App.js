@@ -29,7 +29,8 @@ class App extends Component {
                     />
                 </div>
                 <footer class="footer">
-                    Copyright © 2020 Zyrah Bernardino, All Rights Reserved.
+                    Copyright © 2020 <a href="https://zyrahbernardino.com/">Zyrah Bernardino</a>, All Rights Reserved.
+                    <a href="https://github.com/zyrahb">(github)</a>
                 </footer>
             </Router>
 
