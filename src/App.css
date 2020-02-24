@@ -2,6 +2,13 @@
   text-align: center;
 }
 
+
+.footer {
+    margin: 0 auto;
+    text-align: center;
+
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;

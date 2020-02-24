@@ -8,16 +8,15 @@ Tech stack: AWS Amplify, React, Graphql(DynamoDB/AppSync)
 https://d1v0z5tmm8db3h.cloudfront.net
 
 ## TODO
-- Focus Update in place
-- ~~Drop down for colour~~
-- ~~Text box for Topic/description~~
-- ~~Add TAG model to schema~~
+- Put my details at the bottom and also date
+- Add a screenshot to the docs
+- Diagram to update in place no reload
+- Focus view, when adding a topic make it so the link is automatic to topic
 - Add TAG on UPDATE and ADD Topic 
 - Filter on tag, for Vista view, with + filter on things
 - Multiple TAGs on TOPIC
 - Limit tags to 1 word lower case
 - Update link, will be an addition to add
-- Delete topic, to delete the links too make sure there's a are you sure
 - Delete links
 - Upload Image for topic
 - Cache large search
@@ -25,13 +24,14 @@ https://d1v0z5tmm8db3h.cloudfront.net
 - Use for ipad
 - Study mode/Edit mode
 - Click on topic, redirects instead of new page
-- First time users have a topic and a link
 - Fix up cognito so username doesn't have to Case Sensitive
-- Focus view, when adding a topic make it so the link is automatic to topic
 - Add more colours and have it shown at the dropdown
-- ~~Change tab icon~~
 - Cap characters for Description in Topic
-- Put my details at the bottom
+- ~~Delete topic and related links~~
+- ~~Text box for Topic/description~~
+- ~~Drop down for colour~~
+- ~~Add TAG model to schema~~
+- ~~Change tab icon~~
 
 ## Use
 - `npm  start` will run on localhost:3000 (though will probs need to create your own amplify project :sweat_smile:)
