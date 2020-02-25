@@ -74,25 +74,9 @@ class ActionMenu extends Component {
         return (
             <div>
                 <div className={"focus-details-component"}>
-
-                    <Route
-                        path="/" exact
-                        render={
-                            props =>
                                 <div>
                                     <Header size={'large'}>Welcome to Mindhive!</Header>
                                 </div>
-                        }/>
-                    <Route
-                        path="/topic/:topicId" exact
-                        render={
-                            props =>
-                                <div>
-                                    <UpdateTopic topic={this.props.topic}/>
-                                    {/*<UpdateLink link={this.props.link}/>*/}
-                                </div>
-                        }
-                    />
                 </div>
                 <AddTopic/>
                 <div>
@@ -103,15 +87,6 @@ class ActionMenu extends Component {
                     }
                 </div>
                 <AddTag/>
-                <Route
-                    path="/topic/:topicId" exact
-                    render={
-                        props =>
-                            <div>
-                                <DeleteTopic topic={this.props.topic} links={this.props.links}/>
-                            </div>
-                    }
-                />
             </div>
         )
     }
@@ -392,130 +367,5 @@ class UpdateTopic extends Component {
         )
     }
 }
-
-
-class DeleteTopic extends Component {
-    constructor(props) {
-        super(props);
-    }
-
-    handleChange = (event) => {
-        let change = {};
-        change[event.target.name] = event.target.value;
-        this.setState(change);
-    };
-
-    handleSubmit = async (event) => {
-        event.preventDefault();
-        console.log(event);
-        const DeleteTopic = `mutation DeleteTopic($id: ID!)  {
-            deleteTopic(input: {
-                id: $id
-            }) {
-                id
-            }
-        }`;
-
-        const DeleteLink = `mutation DeleteLink($id: ID!)  {
-            deleteLink(input: {
-                id: $id
-            }) {
-                id
-            }
-        }`;
-
-        // console.info(this.state);
-
-        const result = await API.graphql(graphqlOperation(DeleteTopic,
-            {
-                id: this.props.topic.key
-            }));
-        console.log(JSON.stringify(result));
-
-        // console.info(this.props);
-        this.props.links.forEach(async link => {
-            console.log(link.linkid);
-            const result = await API.graphql(graphqlOperation(DeleteLink,
-                {
-                    id: link.linkid
-                }));
-            console.log(JSON.stringify(result));
-        });
-
-        this.setState({name: '', description: ''});
-        // alert(JSON.stringify(window.location));
-        window.location.replace("/");
-    };
-
-    render() {
-        return (
-            <div>
-                <div className={"action-component"}>
-                    <form className="ui form" onSubmit={this.handleSubmit}>
-                        <button className="ui button" type="submit">Delete Topic</button>
-                    </form>
-                </div>
-            </div>
-        )
-    }
-}
-
-//
-// class UpdateLink extends Component {
-//     constructor(props) {
-//         super(props);
-//         this.state = {
-//             title: ''
-//         };
-//     }
-//
-//     handleChange = (event) => {
-//         let change = {};
-//         change[event.target.name] = event.target.value;
-//         this.setState(change);
-//     };
-//
-//     handleSubmit = async (event) => {
-//         event.preventDefault();
-//         console.log(event);
-//         const UpdateLink = `mutation UpdateLink($id: ID!, $title: String)  {
-//             updateLink(input:{
-//                 id: $id
-//                 title: $title
-//             }) {
-//                 id
-//             }
-//         }`;
-//
-//         console.info(this.state);
-//         console.info(this.props);
-//         const result = await API.graphql(graphqlOperation(UpdateLink,
-//             {
-//                 id: this.props.link.linkid,
-//                 title: this.state.title,
-//             }));
-//         console.info(result);
-//         this.setState({name: '', description: ''})
-//     };
-//
-//     render() {
-//         console.info(this.state);
-//         console.info(this.props);
-//         return (
-//             <div>
-//                 <Header as='h3'>Update the link</Header>
-//                 <form className="ui form" onSubmit={this.handleSubmit}>
-//                     <div className="field">
-//                         <label>Edit Link</label>
-//                         <input type="text" name={"title"}
-//                                onChange={this.handleChange}/>
-//                     </div>
-//                     <button className="ui button" type="submit">Submit</button>
-//                 </form>
-//             </div>
-//         )
-//     }
-// }
-
 
 export default ActionMenu;

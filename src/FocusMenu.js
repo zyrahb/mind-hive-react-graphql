@@ -110,6 +110,12 @@ class AddTopicLink extends Component {
         change[event.target.name] = event.target.value;
         this.setState(change);
 //        alert(JSON.stringify(this.state));
+
+//        if (this.state.direction == 'to') {
+//                    alert('to');
+//        } else {
+//                    alert('from');
+//        }
     };
 
     handleSubmit = async (event) => {
@@ -150,6 +156,7 @@ class AddTopicLink extends Component {
             this.state.to = this.props.topic.key;
 //            alert(JSON.stringify(this.state));
         } else {
+//            alert("from");
             this.state.from = this.props.topic.key;
             this.state.to = result_topic.data.createTopic.id;
 //            alert(JSON.stringify(this.state));
@@ -193,8 +200,8 @@ class AddTopicLink extends Component {
                         <div className="field">
                             <label>Direction of arrow</label>
                             <select name={"direction"} className="ui dropdown" onChange={this.handleChange}>
-                                <option value="to">{this.props.topic.text} &#61;&#62;</option>
-                                <option value="from">&#61;&#62; {this.props.topic.text}</option>
+                                <option value="to">&#61;&#62; {this.props.topic.text}</option>
+                                <option value="from">{this.props.topic.text} &#61;&#62;</option>
                             </select>
                         </div>
                         <div className="field">
