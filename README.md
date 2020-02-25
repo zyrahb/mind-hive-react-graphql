@@ -38,7 +38,7 @@ https://d1v0z5tmm8db3h.cloudfront.net
 - `amplify publish` update changes for running website
 
 ## Screenshot
-![Image](screenshots/Screen Shot 2020-02-25 at 4.13.38 pm.png)
+![Image](https://github.com/zyrahb/mind-hive-react-graphql/blob/master/screenshots/Screen%20Shot%202020-02-25%20at%204.13.38%20pm.png?raw=true)
 
 ## Lessons Learnt 
 
