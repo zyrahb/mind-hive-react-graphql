@@ -38,7 +38,7 @@ https://d1v0z5tmm8db3h.cloudfront.net
 - `amplify publish` update changes for running website
 
 ## Screenshot
-![Image](/Users/zyrahbernardino/Workspace/zyrah/brain-map/screenshots/Screen Shot 2020-02-25 at 4.13.38 pm.png)
+![Image](screenshots/Screen Shot 2020-02-25 at 4.13.38 pm.png)
 
 ## Lessons Learnt 
 
