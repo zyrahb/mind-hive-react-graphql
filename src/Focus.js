@@ -5,7 +5,7 @@ import {ReactDiagram} from "gojs-react";
 import React, {Component} from "react";
 import {API, graphqlOperation} from 'aws-amplify';
 import {Header} from 'semantic-ui-react';
-import ActionMenu from './ActionMenu'
+import FocusMenu from './FocusMenu'
 import 'gojs/extensions/HyperlinkText.js';
 
 var toFocus = '';
@@ -228,7 +228,7 @@ class Focus extends Component {
             <div>
                 {
                     this.state.hasResults
-                        ? <div className="ui grid container padded">
+                        ? <div className="ui grid container">
                             <div className="twelve wide column">
                                 <ReactDiagram
                                     initDiagram={initFocusDiagram}
@@ -239,7 +239,7 @@ class Focus extends Component {
                                 />
                             </div>
                             <div className="four wide column">
-                                <ActionMenu topic={this.state.topic} link={linkNode} links={this.state.links}/>
+                                <FocusMenu topic={this.state.topic} link={linkNode} links={this.state.links}/>
                             </div>
                         </div>
                         : this.noResults()

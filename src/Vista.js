@@ -5,7 +5,7 @@ import {ReactDiagram} from "gojs-react";
 import React, {Component} from "react";
 import {API, graphqlOperation} from 'aws-amplify';
 import {Header} from 'semantic-ui-react';
-import ActionMenu from './ActionMenu';
+import VistaMenu from './VistaMenu';
 import 'gojs/extensions/HyperlinkText.js';
 
 function ContinuousForceDirectedLayout() {
@@ -152,7 +152,7 @@ class Vista extends Component {
                         }
                     </div>
                     <div className="four wide column">
-                        <ActionMenu/>
+                        <VistaMenu/>
                     </div>
                 </div>
             </div>
