@@ -137,7 +137,7 @@ class Vista extends Component {
     render() {
         return (
             <div>
-                <div className="ui grid container padded">
+                <div className="ui grid container">
                     <div className="twelve wide column">
                         {
                             this.state.hasResults

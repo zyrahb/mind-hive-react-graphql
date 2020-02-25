@@ -68,5 +68,9 @@
 }
 
 .column {
-    width: 50%
+    width: 50%;
+}
+
+.ui.grid {
+    margin: 0 0 0 0;
 }

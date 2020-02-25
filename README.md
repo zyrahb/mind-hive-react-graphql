@@ -8,8 +8,6 @@ Tech stack: AWS Amplify, React, Graphql(DynamoDB/AppSync)
 https://d1v0z5tmm8db3h.cloudfront.net
 
 ## TODO
-- Put my details at the bottom and also date
-- Add a screenshot to the docs
 - Diagram to update in place no reload
 - Focus view, when adding a topic make it so the link is automatic to topic
 - Add TAG on UPDATE and ADD Topic 
@@ -27,6 +25,8 @@ https://d1v0z5tmm8db3h.cloudfront.net
 - Fix up cognito so username doesn't have to Case Sensitive
 - Add more colours and have it shown at the dropdown
 - Cap characters for Description in Topic
+- ~~Add a screenshot to the docs~~
+- ~~Put my details at the bottom and also date~~
 - ~~Delete topic and related links~~
 - ~~Text box for Topic/description~~
 - ~~Drop down for colour~~
@@ -35,7 +35,10 @@ https://d1v0z5tmm8db3h.cloudfront.net
 
 ## Use
 - `npm  start` will run on localhost:3000 (though will probs need to create your own amplify project :sweat_smile:)
-- `amplify publsih` update changes for running website
+- `amplify publish` update changes for running website
+
+## Screenshot
+![Image](/Users/zyrahbernardino/Workspace/zyrah/brain-map/screenshots/Screen Shot 2020-02-25 at 4.13.38 pm.png)
 
 ## Lessons Learnt 
 
