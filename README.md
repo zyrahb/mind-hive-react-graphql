@@ -9,9 +9,10 @@ https://d1v0z5tmm8db3h.cloudfront.net
 
 ## TODO
 - Diagram to update in place no reload
-- Add TAG on UPDATE and ADD Topic 
-- Filter on tag, for Vista view, with + filter on things
-- Multiple TAGs on TOPIC
+- TagView `/tag/12345` - Like Focus (see link-description)
+- TagViewMenu - Add Topic to tag (add multiple)
+- VistaMenu, links for all the TagViews
+- Fix navigation, don't have new tab, home button
 - Limit tags to 1 word lower case
 - Update link, will be an addition to add
 - Delete links
@@ -36,6 +37,7 @@ https://d1v0z5tmm8db3h.cloudfront.net
 ## Use
 - `npm  start` will run on localhost:3000 (though will probs need to create your own amplify project :sweat_smile:)
 - `amplify publish` update changes for running website
+- `amplify publish -c` removes cache
 
 ## Screenshot
 ![Image](https://github.com/zyrahb/mind-hive-react-graphql/blob/master/screenshots/Screen%20Shot%202020-02-25%20at%204.13.38%20pm.png?raw=true)
@@ -54,6 +56,7 @@ It takes a couple of hours to get the cloudfront site working. Don't despair.
 - graphql schemas: https://aws-amplify.github.io/docs/cli-toolchain/graphql
 - React ui: https://react.semantic-ui.com
 - Amplify Auth: https://github.com/mwarger/amplify-auth-examples
+- Amplify appsync 'many-to-many': https://aws-amplify.github.io/docs/cli-toolchain/graphql
 
 #### Colours
 - 5E36FF, bluepurple 

@@ -21,8 +21,11 @@ type Link @model @auth(rules: [{allow: owner}]){
     color: String
 }
 
-type TagHelper @model(queries: null) @key(name: "byTopic", fields: ["topicID", "helperID"])
-@key(name: "byHelper", fields: ["helperID", "topicID"]) @auth(rules: [{allow: owner}]){
+type TagHelper
+@model(queries: null)
+@key(name: "byTopic", fields: ["topicID", "helperID"])
+@key(name: "byHelper", fields: ["helperID", "topicID"])
+@auth(rules: [{allow: owner}]){
     id: ID!
     topicID: ID!
     helperID: ID!
@@ -35,3 +38,6 @@ type Tag @model @auth(rules: [{allow: owner}]){
     name: String!
     topics: [TagHelper] @connection(keyName: "byHelper", fields: ["id"])
 }
+
+# post is topic and user is tag
+# Getting user with post seems easy
