@@ -200,8 +200,8 @@ class AddTopicLink extends Component {
                         <div className="field">
                             <label>Direction of arrow</label>
                             <select name={"direction"} className="ui dropdown" onChange={this.handleChange}>
-                                <option value="to">&#61;&#62; {this.props.topic.text}</option>
                                 <option value="from">{this.props.topic.text} &#61;&#62;</option>
+                                <option value="to">&#61;&#62; {this.props.topic.text}</option>
                             </select>
                         </div>
                         <div className="field">
@@ -274,7 +274,7 @@ class AddLink extends Component {
                     <form className="ui form" onSubmit={this.handleSubmit}>
                         <select name={"from"} className="ui dropdown" onChange={this.handleChange}>
                             <option value="">Topic From</option>
-                            {this.props.allTopics.map(({name, id}) => <option value={id}>{name}</option>)}
+                            {this.props.allTopics.sort((a, b) => a.name > b.name ? 1 : -1).map(({name, id}) => <option value={id}>{name}</option>)}
                         </select>
                         <p/>
                         <div className="field">
@@ -284,7 +284,7 @@ class AddLink extends Component {
                         </div>
                         <select name={"to"} className="ui dropdown" onChange={this.handleChange}>
                             <option value="">Topic To</option>
-                            {this.props.allTopics.map(({name, id}) => <option value={id}>{name}</option>)}
+                            {this.props.allTopics.sort((a, b) => a.name > b.name ? 1 : -1).map(({name, id}) => <option value={id}>{name}</option>)}
                         </select>
                         <p/>
                         <button className="ui button" type="submit">Add</button>

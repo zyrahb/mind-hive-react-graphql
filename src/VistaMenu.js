@@ -218,7 +218,7 @@ class AddLink extends Component {
                     <form className="ui form" onSubmit={this.handleSubmit}>
                         <select name={"from"} className="ui dropdown" onChange={this.handleChange}>
                             <option value="">Topic From</option>
-                            {this.props.allTopics.map(({name, id}) => <option value={id}>{name}</option>)}
+                            {this.props.allTopics.sort((a, b) => a.name > b.name ? 1 : -1).map(({name, id}) => <option value={id}>{name}</option>)}
                         </select>
                         <p/>
                         <div className="field">
@@ -227,8 +227,8 @@ class AddLink extends Component {
                                    onChange={this.handleChange}/>
                         </div>
                         <select name={"to"} className="ui dropdown" onChange={this.handleChange}>
-                            <option value="">Topic To</option>
-                            {this.props.allTopics.map(({name, id}) => <option value={id}>{name}</option>)}
+                            <option value="">=>Topic To</option>
+                            {this.props.allTopics.sort((a, b) => a.name > b.name ? 1 : -1).map(({name, id}) => <option value={id}>{name}</option>)}
                         </select>
                         <p/>
                         <button className="ui button" type="submit">Add</button>
