@@ -32,6 +32,7 @@ https://d1v0z5tmm8db3h.cloudfront.net
 - ~~Drop down for colour~~
 - ~~Add TAG model to schema~~
 - ~~Change tab icon~~
+- ~~Topic to link show alphabetically~~
 
 ## Use
 - `npm  start` will run on localhost:3000 (though will probs need to create your own amplify project :sweat_smile:)
